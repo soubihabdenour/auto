@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Vehicle photo placeholder">
+    <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#F6F8FB"/>
+            <stop offset="1" stop-color="#E3E7EE"/>
+        </linearGradient>
+    </defs>
+    <rect width="800" height="500" fill="url(#bg)"/>
+
+    <!-- Subtle KAE mark, low opacity -->
+    <g transform="translate(370,180) scale(1.2)" opacity="0.18">
+        <rect width="64" height="64" rx="14" fill="#0A1A2F"/>
+        <rect x="17" y="14" width="5" height="36" rx="1.5" fill="#ffffff"/>
+        <path d="M22 32 L40 14 L46 14 L26 34 Z" fill="#ffffff"/>
+        <path d="M22 32 L40 50 L46 50 L26 30 Z" fill="#CD2E3A"/>
+    </g>
+
+    <!-- Stylized car silhouette -->
+    <g transform="translate(0,30)" fill="none" stroke="#A6B0BD" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M170 320 L210 240 L320 220 L500 220 L600 240 L630 320 Z"/>
+        <line x1="170" y1="320" x2="630" y2="320"/>
+        <line x1="320" y1="220" x2="320" y2="320"/>
+        <line x1="500" y1="220" x2="500" y2="320"/>
+        <circle cx="270" cy="320" r="34" fill="#A6B0BD"/>
+        <circle cx="540" cy="320" r="34" fill="#A6B0BD"/>
+        <circle cx="270" cy="320" r="14" fill="#F6F8FB" stroke="none"/>
+        <circle cx="540" cy="320" r="14" fill="#F6F8FB" stroke="none"/>
+    </g>
+
+    <text x="400" y="440" text-anchor="middle"
+          font-family="Inter, system-ui, -apple-system, sans-serif"
+          fill="#5B6877" font-size="22" font-weight="500" letter-spacing="0.02em">
+        Photos coming soon
+    </text>
+</svg>

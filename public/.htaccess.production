@@ -1,0 +1,82 @@
+# =============================================================
+# Korea Auto Export — production .htaccess
+#
+# Copy this file over .htaccess on the production server:
+#   cp public/.htaccess.production public/.htaccess
+#
+# Differences from the dev .htaccess:
+#   - Forces HTTPS
+#   - Sets HSTS with preload
+#   - Tightens CSP (no inline JS exceptions outside known scripts)
+#   - Disables directory browsing
+# =============================================================
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+AddDefaultCharset UTF-8
+ServerSignature Off
+
+# ---- Force HTTPS (uncomment after the cert is live) ---------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # If request points at an existing file or directory, serve it as-is
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Otherwise, route through index.php
+    RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
+
+# ---- Security headers (production) --------------------------
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set X-XSS-Protection "0"
+
+    # CSP — allow Bootstrap CDN, GA4, Plausible. Tighten further once Bootstrap is bundled locally.
+    Header always set Content-Security-Policy "default-src 'self'; \
+        img-src 'self' data: https:; \
+        style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; \
+        script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://plausible.io; \
+        font-src 'self' data:; \
+        connect-src 'self' https://www.google-analytics.com https://plausible.io; \
+        frame-src https://www.youtube-nocookie.com https://player.vimeo.com; \
+        object-src 'none'; \
+        base-uri 'self'; \
+        form-action 'self' https://wa.me"
+
+    # Long-cache for hashed assets
+    <FilesMatch "\.(?:css|js|jpg|jpeg|png|webp|svg|woff2|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Don't cache HTML
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "no-store"
+    </FilesMatch>
+</IfModule>
+
+# ---- Compression --------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ---- Block hidden / sensitive files -------------------------
+<FilesMatch "^\.|composer\.(json|lock)$|\.env$|\.md$|\.sql$">
+    Require all denied
+</FilesMatch>
+
+# ---- Custom error pages route through PHP -------------------
+ErrorDocument 404 /index.php
+ErrorDocument 500 /index.php

@@ -1,0 +1,96 @@
+<?php
+
+return [
+    'hero' => [
+        'eyebrow'     => 'Korean cars · Direct import to Algeria',
+        'short_title' => 'Home',
+        'headline'    => 'Import premium Korean cars, delivered to Algeria.',
+        'subheadline' => 'Verified vehicles, transparent inspection reports, competitive prices.',
+    ],
+    'quick_search' => [
+        'title'    => 'Quick search',
+        'brand'    => 'Brand',
+        'budget'   => 'Budget ($)',
+        'year_min' => 'Year from',
+        'go'       => 'Search',
+        'any'      => 'Any',
+    ],
+    'stats' => [
+        'items' => [
+            ['value' => '5+',   'label' => 'Korean brands'],
+            ['value' => '5–7',  'label' => 'weeks door-to-door'],
+            ['value' => '100%', 'label' => 'inspected in Korea'],
+            ['value' => '24h',  'label' => 'reply guarantee'],
+        ],
+    ],
+    'trust' => [
+        'inspected' => 'Inspected in Korea',
+        'shipping'  => 'Delivered to Algiers',
+        'customs'   => 'Customs assist',
+        'pricing'   => 'Transparent pricing',
+        'response'  => '24-hour reply',
+    ],
+    'featured' => [
+        'eyebrow'  => 'Featured · Now available',
+        'title'    => 'Hand-picked Korean cars',
+        'subtitle' => 'Curated from Korean auctions and dealers, fully inspected before shipping.',
+        'view_all' => 'View all vehicles',
+        'empty'    => 'New vehicles arriving soon — request a specific model and we will source it.',
+    ],
+    'why' => [
+        'eyebrow'  => 'Why us',
+        'title'    => 'A better way to buy your next car.',
+        'subtitle' => 'Disciplined maintenance, lower mileage, all-in pricing — beating the local market on every dimension that matters.',
+        'more'     => 'Read the full case',
+    ],
+    'process' => [
+        'eyebrow'  => 'Process',
+        'title'    => 'How it works.',
+        'subtitle' => 'Six clear steps, from picking the car to delivery at your door. Five to seven weeks, no surprises.',
+        'more'     => 'See the full process',
+    ],
+    'vs' => [
+        'eyebrow'   => 'Korea vs local market',
+        'title'     => 'See the difference side by side.',
+        'subtitle'  => 'Same year, same model. Different reality.',
+        'korea_title' => 'Imported from Korea',
+        'local_title' => 'Local secondary market',
+        'korea' => [
+            'Inspected in person before shipping',
+            'Documented maintenance history',
+            'Lower average mileage (~12 000 km/year)',
+            'High-spec Korean trim levels',
+            'All-in transparent quote',
+        ],
+        'local' => [
+            'Limited or no inspection',
+            'Rarely documented service records',
+            'Higher and inconsistent mileage',
+            'Variable specs and trim',
+            'Negotiated price, hidden surcharges',
+        ],
+    ],
+    'testimonials' => [
+        'eyebrow'  => 'Testimonials',
+        'title'    => 'Trusted by buyers across Algeria.',
+        'subtitle' => 'Hundreds of cars successfully delivered, from Oran to Constantine.',
+    ],
+    'faq' => [
+        'eyebrow' => 'Frequently asked',
+        'title'   => 'Everything you need to know.',
+        'items' => [
+            ['q' => 'How long does the whole import take?',        'a' => 'Typically 5 to 7 weeks from confirmation to delivery in Algeria.'],
+            ['q' => 'Who handles customs?',                         'a' => 'We do. Our Algeria team prepares all paperwork and follows the clearance.'],
+            ['q' => 'Can I inspect the car before buying?',         'a' => 'Yes — detailed photos, video, and a documented inspection report before any payment.'],
+            ['q' => 'What payment methods do you accept?',          'a' => 'Bank transfer with an official receipt. No cash.'],
+            ['q' => 'Can I request a model not in the catalogue?',  'a' => 'Absolutely. Use the "Request a vehicle" form and we\'ll start sourcing it.'],
+        ],
+    ],
+    'final_cta' => [
+        'eyebrow'   => 'Ready when you are',
+        'title'     => 'Tell us what you want. We\'ll find it.',
+        'subtitle'  => 'Model, budget, delivery date — your shortlist arrives in 48 hours.',
+        'primary'   => 'Request a vehicle',
+        'secondary' => 'Chat on WhatsApp',
+    ],
+];

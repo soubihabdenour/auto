@@ -1,0 +1,317 @@
+/* =================================================================
+   Korea Auto Export — Admin panel stylesheet
+   Same design tokens as the public site (loaded via app.css).
+   ================================================================= */
+
+.kae-admin {
+    background: var(--c-bg-soft);
+    color: var(--c-text);
+    font-family: var(--ff-latin);
+    min-height: 100vh;
+}
+
+/* ---------- Shell layout ---------- */
+.kae-admin-shell {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+.kae-admin-main { min-width: 0; }
+.kae-admin-content {
+    padding-inline: 1.5rem;
+}
+@media (max-width: 991.98px) {
+    .kae-admin-shell { grid-template-columns: 1fr; }
+    .kae-admin-sidebar { display: none; }  /* mobile drawer comes in Phase 4 */
+}
+
+/* ---------- Sidebar ---------- */
+.kae-admin-sidebar {
+    background: var(--c-navy);
+    color: rgba(255,255,255,0.85);
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+}
+.kae-admin-brand {
+    display: block;
+    padding: 0.25rem 0.5rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.kae-admin-brand img { width: 100%; max-width: 200px; height: auto; }
+
+.kae-admin-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+.kae-admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--r-md);
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-weight: 500;
+    transition: background var(--t-fast), color var(--t-fast);
+}
+.kae-admin-nav-link:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+}
+.kae-admin-nav-link.is-active {
+    background: var(--c-red);
+    color: #fff;
+}
+.kae-admin-nav-icon { font-size: 1.1rem; line-height: 1; }
+
+.kae-admin-sidebar-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.10); }
+.kae-admin-link-out { color: rgba(255,255,255,0.6); text-decoration: none; font-size: var(--fs-sm); }
+.kae-admin-link-out:hover { color: #fff; }
+
+/* ---------- Topbar ---------- */
+.kae-admin-topbar {
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-border);
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.kae-admin-topbar-left { font-weight: 600; }
+
+/* ---------- Auth page (no shell) ---------- */
+.kae-admin-auth {
+    min-height: 100vh;
+    background:
+        radial-gradient(800px 400px at 50% 0%, rgba(205,46,58,0.10), transparent 60%),
+        linear-gradient(180deg, var(--c-bg-soft) 0%, #ffffff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+.kae-admin-login {
+    width: 100%;
+    max-width: 420px;
+}
+.kae-admin-login-card {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    padding: 2.25rem;
+    box-shadow: var(--shadow-2);
+}
+
+/* ---------- Page headers / cards ---------- */
+.kae-page-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.kae-page-head h1 {
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+.kae-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-1);
+}
+.kae-card-header {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--c-border);
+    font-weight: 600;
+}
+.kae-card-body { padding: 1rem; }
+
+/* ---------- KPI cards ---------- */
+.kae-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.kae-kpi {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 1.1rem 1.25rem;
+}
+.kae-kpi-label {
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.kae-kpi-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--c-navy);
+    line-height: 1.1;
+    margin-top: 0.25rem;
+    font-variant-numeric: tabular-nums;
+}
+.kae-kpi-delta { font-size: var(--fs-xs); color: var(--c-text-muted); }
+
+/* ---------- Tables ---------- */
+.kae-table { width: 100%; font-size: var(--fs-sm); }
+.kae-table th {
+    text-transform: uppercase;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.06em;
+    color: var(--c-text-muted);
+    font-weight: 600;
+    padding: 0.65rem 0.75rem;
+    background: var(--c-bg-soft);
+    border-bottom: 1px solid var(--c-border);
+}
+.kae-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--c-border);
+    vertical-align: middle;
+}
+.kae-table tbody tr:hover { background: var(--c-bg-tinted); }
+.kae-table .actions a, .kae-table .actions button {
+    color: var(--c-text-muted);
+    margin-inline-start: 0.25rem;
+    text-decoration: none;
+}
+.kae-table .actions a:hover { color: var(--c-navy); }
+
+/* Status pills */
+.kae-status {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--r-full);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.kae-status-new        { background: rgba(46, 93, 170, 0.10); color: var(--c-info); }
+.kae-status-contacted  { background: rgba(199, 122, 7, 0.12); color: var(--c-warning); }
+.kae-status-qualified  { background: rgba(46, 93, 170, 0.10); color: var(--c-info); }
+.kae-status-negotiating{ background: rgba(199, 122, 7, 0.12); color: var(--c-warning); }
+.kae-status-won        { background: rgba(27, 138, 90, 0.12); color: var(--c-success); }
+.kae-status-lost       { background: rgba(192, 57, 43, 0.10); color: var(--c-danger); }
+.kae-status-available  { background: rgba(27, 138, 90, 0.12); color: var(--c-success); }
+.kae-status-reserved   { background: rgba(199, 122, 7, 0.12); color: var(--c-warning); }
+.kae-status-sold       { background: rgba(91, 104, 119, 0.12); color: var(--c-text-muted); }
+.kae-status-draft      { background: rgba(91, 104, 119, 0.12); color: var(--c-text-muted); }
+.kae-status-archived   { background: rgba(91, 104, 119, 0.12); color: var(--c-text-subtle); }
+
+/* ---------- Forms ---------- */
+.kae-form-section {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+}
+.kae-form-section h2 {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+    color: var(--c-navy);
+}
+
+/* ---------- Tabs ---------- */
+.kae-admin-tabs {
+    border-bottom: 2px solid var(--c-border);
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+}
+.kae-admin-tabs .nav-link {
+    color: var(--c-text-muted);
+    font-weight: 600;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    padding: 0.55rem 1rem;
+}
+.kae-admin-tabs .nav-link.active {
+    color: var(--c-navy);
+    border-bottom-color: var(--c-red);
+    background: transparent;
+}
+
+/* ---------- Image uploader ---------- */
+.kae-uploader {
+    border: 2px dashed var(--c-border-strong);
+    border-radius: var(--r-md);
+    padding: 1.5rem;
+    text-align: center;
+    background: var(--c-bg-soft);
+    cursor: pointer;
+    transition: border-color var(--t-base), background var(--t-base);
+}
+.kae-uploader:hover { border-color: var(--c-red); background: var(--c-bg); }
+.kae-uploader input[type="file"] { display: none; }
+
+.kae-thumb-grid {
+    display: grid;
+    gap: 0.65rem;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    margin-top: 1rem;
+}
+.kae-thumb {
+    position: relative;
+    aspect-ratio: 4/3;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+}
+.kae-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.kae-thumb-actions {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 0.25rem 0.4rem;
+    background: rgba(10,26,47,0.78);
+    display: flex;
+    gap: 0.25rem;
+    justify-content: space-between;
+    font-size: var(--fs-xs);
+}
+.kae-thumb-actions button {
+    background: transparent;
+    border: 0;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+}
+.kae-thumb-actions button:hover { color: #fff; }
+.kae-thumb.is-cover { border-color: var(--c-red); box-shadow: 0 0 0 2px var(--c-red); }
+.kae-thumb-cover-badge {
+    position: absolute;
+    top: 0.35rem;
+    inset-inline-start: 0.35rem;
+    background: var(--c-red);
+    color: #fff;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: var(--r-full);
+}
+
+/* ---------- Empty state ---------- */
+.kae-admin-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--c-text-muted);
+    border: 1px dashed var(--c-border-strong);
+    border-radius: var(--r-md);
+    background: var(--c-bg);
+}

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost:8000/ar</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/vehicles</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/vehicles"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/vehicles</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/vehicles"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/vehicles</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/vehicles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/vehicles"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/why-korea</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/why-korea"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/why-korea</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/why-korea"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/why-korea</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/why-korea"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/why-korea"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/import-process</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/import-process"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/import-process"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/import-process"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/import-process</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/import-process"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/import-process"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/import-process"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/import-process</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/import-process"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/import-process"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/import-process"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/testimonials</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/testimonials"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/testimonials</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/testimonials"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/testimonials</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/testimonials"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/about</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/about"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/about</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/about"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/about</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/about"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/about"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/contact</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/contact"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/contact</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/contact"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/contact</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/contact"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/ar/request-vehicle</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/request-vehicle"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/fr/request-vehicle</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/request-vehicle"/>
+  </url>
+  <url>
+    <loc>http://localhost:8000/en/request-vehicle</loc>
+    <lastmod>2026-06-08T06:26:20+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="http://localhost:8000/ar/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="http://localhost:8000/fr/request-vehicle"/>
+    <xhtml:link rel="alternate" hreflang="en" href="http://localhost:8000/en/request-vehicle"/>
+  </url>
+</urlset>

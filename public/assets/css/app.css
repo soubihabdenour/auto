@@ -1,0 +1,1190 @@
+/* =================================================================
+   Korea Auto Export — brand stylesheet (Phase 2.5 identity refresh)
+   See docs/08-brand-identity.md for the source of truth.
+   ================================================================= */
+
+/* -----------------------------------------------------------------
+   1. Design tokens
+   ----------------------------------------------------------------- */
+:root {
+    /* Core */
+    --c-navy:           #0A1A2F;
+    --c-navy-700:       #142B4A;
+    --c-navy-900:       #06101D;
+    --c-red:            #CD2E3A;
+    --c-red-700:        #A6212B;
+    --c-red-50:         #FBEAEC;
+
+    /* Surfaces */
+    --c-bg:             #FFFFFF;
+    --c-bg-soft:        #F6F8FB;
+    --c-bg-tinted:      #EEF2F7;
+    --c-border:         #E3E7EE;
+    --c-border-strong:  #CDD4DF;
+
+    /* Text */
+    --c-text:           #0E1726;
+    --c-text-muted:     #5B6877;
+    --c-text-subtle:    #8B95A4;
+
+    /* Semantic */
+    --c-success:        #1B8A5A;
+    --c-warning:        #C77A07;
+    --c-danger:         #C0392B;
+    --c-info:           #2E5DAA;
+    --c-wa:             #25D366;
+
+    /* Typography */
+    --ff-latin: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --ff-arabic: 'IBM Plex Sans Arabic', 'Inter', system-ui, sans-serif;
+    --ff-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+    --fs-xs:    0.75rem;
+    --fs-sm:    0.875rem;
+    --fs-base:  1rem;
+    --fs-lg:    1.125rem;
+    --fs-xl:    1.25rem;
+    --fs-2xl:   1.5rem;
+    --fs-3xl:   2rem;
+    --fs-4xl:   clamp(2.25rem, 3.5vw + 1rem, 3.5rem);
+    --fs-hero:  clamp(2.5rem,  4.5vw + 1rem, 4.5rem);
+
+    /* Spacing scale (4px base) */
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+    --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+
+    /* Radii */
+    --r-sm: 6px;  --r-md: 12px; --r-lg: 20px; --r-full: 9999px;
+
+    /* Elevation */
+    --shadow-1: 0 1px 2px rgba(10, 26, 47, 0.06);
+    --shadow-2: 0 4px 12px rgba(10, 26, 47, 0.08);
+    --shadow-3: 0 12px 32px rgba(10, 26, 47, 0.14);
+    --shadow-card-hover: 0 12px 28px rgba(10, 26, 47, 0.12);
+
+    /* Motion */
+    --t-fast: 120ms;
+    --t-base: 200ms;
+    --t-slow: 320ms;
+    --e-out: cubic-bezier(.2,.8,.2,1);
+    --e-in-out: cubic-bezier(.4,0,.2,1);
+}
+
+/* -----------------------------------------------------------------
+   2. Base / reset extensions
+   ----------------------------------------------------------------- */
+html { -webkit-text-size-adjust: 100%; }
+body {
+    font-family: var(--ff-latin);
+    color: var(--c-text);
+    background: var(--c-bg);
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+html[lang="ar"] body { font-family: var(--ff-arabic); }
+
+/* Numeric data (prices, mileages, dates) uses tabular nums for alignment */
+.kae-num,
+.kae-card .fw-bold,
+.kae-detail-price,
+.kae-estimator-rows,
+.kae-axes,
+.breadcrumb {
+    font-variant-numeric: tabular-nums;
+}
+
+::selection { background: var(--c-red); color: #fff; }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* -----------------------------------------------------------------
+   3. Bootstrap overrides
+   ----------------------------------------------------------------- */
+.btn {
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    border-radius: var(--r-md);
+    transition: transform var(--t-fast) var(--e-out),
+                box-shadow var(--t-base) var(--e-out),
+                background-color var(--t-base),
+                border-color var(--t-base);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+    background: var(--c-red);
+    border-color: var(--c-red);
+}
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background: var(--c-red-700);
+    border-color: var(--c-red-700);
+    box-shadow: 0 6px 18px rgba(205, 46, 58, 0.32);
+}
+.btn-outline-dark {
+    color: var(--c-navy);
+    border-color: var(--c-border-strong);
+}
+.btn-outline-dark:hover,
+.btn-outline-dark:focus-visible {
+    background: var(--c-navy);
+    border-color: var(--c-navy);
+}
+.btn-outline-light:hover,
+.btn-outline-light:focus-visible {
+    background: rgba(255,255,255,0.10);
+    color: #fff;
+    border-color: rgba(255,255,255,0.6);
+}
+.btn-success {
+    background: var(--c-wa);
+    border-color: var(--c-wa);
+    color: #002b00;
+}
+.btn-success:hover,
+.btn-success:focus-visible {
+    background: #1FB053;
+    border-color: #1FB053;
+    color: #002b00;
+}
+.btn-lg { padding: 0.85rem 1.4rem; }
+
+.form-control,
+.form-select {
+    border-color: var(--c-border-strong);
+    transition: border-color var(--t-base), box-shadow var(--t-base);
+}
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--c-info);
+    box-shadow: 0 0 0 3px rgba(46, 93, 170, 0.15);
+}
+.form-label { font-weight: 500; color: var(--c-text); }
+
+.alert { border: 0; border-radius: var(--r-md); }
+
+a { color: var(--c-navy); text-decoration-color: var(--c-border-strong); text-underline-offset: 3px; }
+a:hover { color: var(--c-red); }
+
+/* -----------------------------------------------------------------
+   4. Header (sticky, scroll-elevated)
+   ----------------------------------------------------------------- */
+.kae-header {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    transition: box-shadow var(--t-base), background var(--t-base);
+}
+.kae-header.is-scrolled {
+    box-shadow: 0 2px 16px rgba(10, 26, 47, 0.06);
+    background: rgba(255, 255, 255, 0.96);
+}
+.kae-header::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--c-border);
+}
+.kae-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--c-navy);
+    transition: opacity var(--t-fast);
+}
+.kae-brand:hover { opacity: 0.85; }
+.kae-brand-mark { height: 40px; width: auto; display: block; }
+.kae-brand-mark--full { height: 44px; }
+.kae-header .nav-link {
+    color: var(--c-text);
+    font-weight: 500;
+    padding-inline: 0.9rem;
+    transition: color var(--t-fast);
+    position: relative;
+}
+.kae-header .nav-link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0.9rem;
+    bottom: 0.35rem;
+    height: 2px;
+    background: var(--c-red);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--t-base) var(--e-out);
+}
+.kae-header .nav-link:hover { color: var(--c-navy); }
+.kae-header .nav-link:hover::after { transform: scaleX(1); }
+
+.kae-lang-switcher .btn { font-weight: 500; }
+
+/* Mobile hamburger (Phase 4 polish: simple show/hide drawer) */
+.kae-header-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    padding: 0.5rem;
+    color: var(--c-navy);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
+@media (max-width: 991.98px) {
+    .kae-header-toggle { display: inline-flex; align-items: center; }
+}
+
+/* -----------------------------------------------------------------
+   5. Footer
+   ----------------------------------------------------------------- */
+.kae-footer {
+    background: var(--c-navy);
+    color: rgba(255,255,255,0.75);
+    margin-top: var(--s-8) !important;
+    padding-block: var(--s-7) !important;
+}
+.kae-footer a { color: rgba(255,255,255,0.85); text-decoration: none; }
+.kae-footer a:hover { color: #fff; }
+.kae-footer-brand { color: #fff; }
+
+/* -----------------------------------------------------------------
+   6. Hero (homepage)
+   ----------------------------------------------------------------- */
+.kae-home-hero {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(900px 480px at 110% -10%, rgba(205, 46, 58, 0.32), transparent 55%),
+        linear-gradient(135deg, var(--c-navy-900) 0%, var(--c-navy-700) 100%);
+    color: #fff;
+    padding-block: var(--s-8) var(--s-9);
+}
+.kae-home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/img/hero-pattern.svg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.kae-home-hero > * { position: relative; }
+.kae-home-hero .kae-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    padding: 0.4rem 0.95rem;
+    border-radius: var(--r-full);
+    border: 1px solid rgba(255,255,255,0.10);
+    margin-bottom: var(--s-5);
+}
+.kae-home-hero h1 {
+    font-size: var(--fs-hero);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--s-4);
+    color: #fff;
+}
+.kae-home-hero p.lead {
+    font-size: var(--fs-xl);
+    color: rgba(255,255,255,0.78);
+    max-width: 56ch;
+}
+.kae-home-hero-search { margin-top: -2.5rem; position: relative; z-index: 2; }
+
+.kae-quick-search {
+    border: 1px solid var(--c-border);
+    box-shadow: var(--shadow-2);
+    border-radius: var(--r-md);
+}
+.kae-quick-search .form-label {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    color: var(--c-text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------
+   7. Trust strip
+   ----------------------------------------------------------------- */
+.kae-trust-strip {
+    background: var(--c-bg);
+    border-block: 1px solid var(--c-border);
+}
+.kae-trust-list {
+    margin: 0;
+    padding-block: var(--s-3);
+}
+.kae-trust-list li {
+    font-weight: 500;
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+}
+.kae-trust-list li::before {
+    content: '';
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--c-success);
+    border-radius: 50%;
+    margin-inline-end: 0.5rem;
+    vertical-align: middle;
+}
+
+/* -----------------------------------------------------------------
+   8. Section titles
+   ----------------------------------------------------------------- */
+section h2 {
+    letter-spacing: -0.015em;
+    color: var(--c-navy);
+}
+
+/* -----------------------------------------------------------------
+   9. Vehicle cards
+   ----------------------------------------------------------------- */
+.kae-card { transition: transform var(--t-base) var(--e-out); }
+.kae-card:hover { transform: translateY(-4px); }
+.kae-card .card {
+    border: 1px solid var(--c-border) !important;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--c-bg);
+    transition: box-shadow var(--t-base) var(--e-out), border-color var(--t-base);
+}
+.kae-card:hover .card {
+    box-shadow: var(--shadow-card-hover) !important;
+    border-color: var(--c-border-strong) !important;
+}
+.kae-card-media {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--c-bg-soft);
+}
+.kae-card-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 400ms var(--e-out);
+}
+.kae-card:hover .kae-card-media img { transform: scale(1.04); }
+
+.kae-card-badge {
+    position: absolute;
+    top: 12px;
+    inset-inline-start: 12px;
+    background: var(--c-red);
+    color: #fff;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--r-full);
+    box-shadow: 0 4px 10px rgba(205,46,58,0.28);
+}
+.kae-card-badge-warning { background: var(--c-warning); }
+.kae-card-badge-muted   { background: var(--c-text-muted); box-shadow: none; }
+
+.kae-card .card-body h3 { letter-spacing: -0.01em; }
+.kae-card .card-body { padding: 1.1rem 1.2rem; }
+.kae-card .card-body .fs-5 { font-weight: 800; color: var(--c-red); letter-spacing: -0.01em; }
+
+/* -----------------------------------------------------------------
+   10. Trust pages
+   ----------------------------------------------------------------- */
+.kae-page-hero {
+    background:
+        radial-gradient(600px 280px at 50% -40px, rgba(205,46,58,0.06), transparent 60%),
+        linear-gradient(180deg, var(--c-bg-soft), var(--c-bg));
+    padding-block: var(--s-8) !important;
+}
+.kae-page-hero h1 {
+    color: var(--c-navy);
+    letter-spacing: -0.02em;
+}
+
+.kae-reason-card {
+    transition: transform var(--t-base) var(--e-out),
+                box-shadow var(--t-base) var(--e-out);
+    border-color: var(--c-border) !important;
+}
+.kae-reason-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2);
+    border-color: var(--c-border-strong) !important;
+}
+.kae-reason-icon { font-size: 2rem; line-height: 1; }
+
+.kae-quote { color: var(--c-navy); }
+.kae-quote::before { content: '“'; color: var(--c-red); margin-inline-end: 0.25rem; }
+.kae-quote::after  { content: '”'; color: var(--c-red); margin-inline-start: 0.25rem; }
+
+/* Timeline (import process) */
+.kae-timeline-step {
+    position: relative;
+    padding-bottom: 1.5rem;
+    border-inline-start: 2px solid var(--c-border);
+    padding-inline-start: 1.5rem;
+    margin-inline-start: 1rem;
+}
+.kae-timeline-step:last-child { border-inline-start-color: transparent; }
+.kae-timeline-num .badge {
+    width: 2.5rem; height: 2.5rem;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: -2.6rem;
+    background: var(--c-navy);
+    box-shadow: 0 4px 12px rgba(10, 26, 47, 0.12);
+}
+
+.kae-testimonial-card { transition: box-shadow var(--t-base); border-color: var(--c-border) !important; }
+.kae-testimonial-card:hover { box-shadow: var(--shadow-2); }
+.kae-stars { letter-spacing: 1px; }
+
+/* -----------------------------------------------------------------
+   11. Process grid (homepage)
+   ----------------------------------------------------------------- */
+.kae-process-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.kae-process-step {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 1.25rem;
+    position: relative;
+    transition: transform var(--t-base) var(--e-out),
+                box-shadow var(--t-base) var(--e-out),
+                border-color var(--t-base);
+}
+.kae-process-step:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+    border-color: var(--c-border-strong);
+}
+.kae-process-num {
+    width: 2.25rem; height: 2.25rem;
+    border-radius: 50%;
+    background: var(--c-navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--fs-sm);
+    margin-bottom: var(--s-3);
+}
+.kae-process-step:nth-child(odd) .kae-process-num { background: var(--c-red); }
+
+/* -----------------------------------------------------------------
+   12. Final CTA
+   ----------------------------------------------------------------- */
+.kae-final-cta {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(700px 320px at 100% 100%, rgba(205,46,58,0.30), transparent 55%),
+        linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-700) 100%);
+    color: #fff;
+}
+.kae-final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/img/hero-pattern.svg');
+    background-size: cover;
+    opacity: 0.4;
+}
+.kae-final-cta > * { position: relative; }
+
+/* -----------------------------------------------------------------
+   13. Vehicle listing
+   ----------------------------------------------------------------- */
+.kae-filters { position: sticky; top: 1rem; }
+.kae-filters form {
+    border-color: var(--c-border) !important;
+    box-shadow: var(--shadow-1);
+}
+
+.kae-empty {
+    background: var(--c-bg-soft);
+    border-radius: var(--r-md);
+    border: 1px dashed var(--c-border-strong);
+}
+
+#kae-results.is-loading {
+    position: relative;
+    opacity: 0.65;
+    pointer-events: none;
+    transition: opacity var(--t-base);
+}
+#kae-results.is-loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(1px);
+    pointer-events: none;
+}
+
+.kae-pagination .page-link {
+    color: var(--c-navy);
+    border-color: var(--c-border);
+}
+.kae-pagination .page-item.active .page-link {
+    background: var(--c-navy);
+    border-color: var(--c-navy);
+}
+.kae-pagination .page-link:hover { background: var(--c-bg-soft); }
+
+/* -----------------------------------------------------------------
+   14. Vehicle detail
+   ----------------------------------------------------------------- */
+.kae-detail-sidebar {
+    position: sticky;
+    top: 1rem;
+    border-color: var(--c-border) !important;
+    box-shadow: var(--shadow-1);
+}
+.kae-detail-price {
+    border-bottom: 1px solid var(--c-border);
+    padding-bottom: var(--s-3);
+}
+.kae-detail-price .display-6 { color: var(--c-red); letter-spacing: -0.02em; }
+.kae-detail-tabs {
+    border-bottom: 2px solid var(--c-border) !important;
+    gap: 0.25rem;
+}
+.kae-detail-tabs .nav-link {
+    color: var(--c-text-muted);
+    font-weight: 600;
+    padding-inline: 1rem;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    background: transparent;
+}
+.kae-detail-tabs .nav-link.active {
+    color: var(--c-navy);
+    border-color: var(--c-red);
+    background: transparent;
+}
+
+/* Gallery */
+.kae-gallery-main {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: var(--c-bg-soft);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    cursor: zoom-in;
+}
+.kae-gallery-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kae-gallery-placeholder { cursor: default; }
+
+.kae-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: background var(--t-base);
+}
+.kae-gallery-arrow-prev { inset-inline-start: 10px; }
+.kae-gallery-arrow-next { inset-inline-end:  10px; }
+.kae-gallery-arrow:hover { background: rgba(0,0,0,0.78); }
+
+.kae-gallery-counter {
+    position: absolute;
+    bottom: 10px;
+    inset-inline-end: 10px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: var(--fs-xs);
+    padding: 3px 9px;
+    border-radius: var(--r-full);
+    z-index: 2;
+    font-variant-numeric: tabular-nums;
+}
+
+.kae-gallery-thumbs {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+}
+.kae-gallery-thumb {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: transparent;
+    cursor: pointer;
+    transition: border-color var(--t-fast), transform var(--t-fast);
+}
+.kae-gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kae-gallery-thumb.is-active { border-color: var(--c-red); }
+.kae-gallery-thumb:hover { transform: scale(1.03); }
+
+.kae-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 16, 29, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1080;
+}
+.kae-lightbox img { max-width: 95vw; max-height: 90vh; object-fit: contain; }
+.kae-lightbox-close {
+    position: absolute;
+    top: 16px;
+    inset-inline-end: 16px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 2.4rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Inspection bars */
+.kae-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--c-border);
+    border-radius: var(--r-full);
+    overflow: hidden;
+}
+.kae-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: var(--r-full);
+    transition: width 400ms var(--e-out);
+}
+.kae-axes dt { font-weight: 500; }
+.kae-axes dd { margin-bottom: 0; }
+.kae-overall-score .display-6 { color: var(--c-success); letter-spacing: -0.02em; }
+
+/* Estimator */
+.kae-estimator-rows dt { font-weight: 500; }
+.kae-estimator-total .text-primary { color: var(--c-red) !important; }
+
+/* Sticky mobile CTA bar */
+.kae-sticky-bar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 0.5rem;
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
+    background: var(--c-navy-900);
+    color: #fff;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1030;
+    border-top: 1px solid rgba(255,255,255,0.08);
+}
+.kae-sticky-btn {
+    flex: 1;
+    padding: 0.75rem 0.5rem;
+    border: 0;
+    border-radius: var(--r-md);
+    background: rgba(255,255,255,0.10);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--fs-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    line-height: 1.1;
+    cursor: pointer;
+}
+.kae-sticky-btn-wa      { background: var(--c-wa); color: #002b00; }
+.kae-sticky-btn-quote   { background: var(--c-red); }
+.kae-sticky-btn-reserve { background: rgba(255,255,255,0.12); }
+.kae-sticky-btn:hover, .kae-sticky-btn:focus { color: #fff; }
+.kae-sticky-btn-wa:hover, .kae-sticky-btn-wa:focus { color: #002b00; }
+@media (max-width: 991.98px) {
+    body { padding-bottom: 5rem; }
+}
+.kae-sticky-icon { font-size: 1.1rem; }
+.kae-sticky-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* -----------------------------------------------------------------
+   15. Lead success page
+   ----------------------------------------------------------------- */
+.kae-success-icon {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-success), #15724A);
+    color: #fff;
+    font-size: 2.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 28px rgba(27, 138, 90, 0.28);
+}
+
+/* -----------------------------------------------------------------
+   16. Utility — eyebrow / badges
+   ----------------------------------------------------------------- */
+.kae-eyebrow-light {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--c-text-muted);
+    font-weight: 600;
+}
+
+/* =================================================================
+   17. v2 layout language (Label-Studio inspired rhythm)
+   ================================================================= */
+
+/* --- Section eyebrow (small label above the section title) --- */
+.kae-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--c-red);
+    margin-bottom: 0.75rem;
+}
+.kae-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--c-red);
+    display: inline-block;
+}
+
+/* --- Section titles (larger + bolder than before) --- */
+.kae-section-title {
+    font-size: clamp(2rem, 3vw + 1rem, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--c-navy);
+    margin-bottom: 1rem;
+}
+.kae-section-subtitle {
+    font-size: var(--fs-lg);
+    color: var(--c-text-muted);
+    max-width: 64ch;
+    margin-bottom: 0;
+}
+
+/* --- Section spacing rhythm --- */
+.kae-section {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+}
+.kae-section--soft  { background: var(--c-bg-soft); }
+.kae-section--dark  {
+    background: linear-gradient(180deg, var(--c-navy) 0%, var(--c-navy-700) 100%);
+    color: #fff;
+}
+.kae-section--dark .kae-section-title { color: #fff; }
+.kae-section--dark .kae-section-subtitle { color: rgba(255,255,255,0.72); }
+.kae-section--dark .kae-eyebrow { color: var(--c-red-50); }
+.kae-section--dark .kae-eyebrow::before { background: var(--c-red); }
+
+/* --- Stats strip (horizontal headline metrics) --- */
+.kae-stats-strip {
+    background: var(--c-bg);
+    border-block: 1px solid var(--c-border);
+}
+.kae-stats {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    padding-block: 1.5rem;
+}
+.kae-stat { text-align: center; }
+.kae-stat-value {
+    display: block;
+    font-size: clamp(1.75rem, 2vw + 1rem, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--c-navy);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+.kae-stat-label {
+    display: block;
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    margin-top: 0.25rem;
+}
+
+/* --- Feature grid (3-column "what you get") --- */
+.kae-feature-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.kae-feature {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 1.75rem;
+    transition: transform var(--t-base) var(--e-out),
+                box-shadow var(--t-base) var(--e-out),
+                border-color var(--t-base);
+}
+.kae-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2);
+    border-color: var(--c-border-strong);
+}
+.kae-feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--r-md);
+    background: var(--c-red-50);
+    color: var(--c-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.kae-feature-title {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--c-navy);
+    margin-bottom: 0.5rem;
+}
+.kae-feature-body {
+    color: var(--c-text-muted);
+    margin-bottom: 0;
+}
+
+/* --- Numbered process row (Label-Studio "how it works" feel) --- */
+.kae-step-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    counter-reset: kae-step;
+}
+.kae-step {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    padding: 1.5rem;
+    position: relative;
+    counter-increment: kae-step;
+    transition: transform var(--t-base) var(--e-out),
+                box-shadow var(--t-base) var(--e-out);
+}
+.kae-step:hover { transform: translateY(-2px); box-shadow: var(--shadow-2); }
+.kae-step-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--c-navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: var(--fs-lg);
+    margin-bottom: 1rem;
+    font-variant-numeric: tabular-nums;
+}
+.kae-step:nth-child(2n) .kae-step-num { background: var(--c-red); }
+.kae-step-title {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    color: var(--c-navy);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.35rem;
+}
+.kae-step-body {
+    color: var(--c-text-muted);
+    font-size: var(--fs-sm);
+    margin-bottom: 0;
+}
+
+/* --- Comparison cards (Korea vs local market) --- */
+.kae-vs {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.kae-vs-card {
+    border-radius: var(--r-md);
+    padding: 1.75rem;
+    position: relative;
+}
+.kae-vs-card--korea {
+    background: linear-gradient(160deg, var(--c-navy) 0%, var(--c-navy-700) 100%);
+    color: #fff;
+    border: 1px solid var(--c-navy-700);
+    box-shadow: var(--shadow-2);
+}
+.kae-vs-card--korea::after {
+    content: '★';
+    position: absolute;
+    top: 12px;
+    inset-inline-end: 16px;
+    color: var(--c-red);
+    font-size: 1.2rem;
+}
+.kae-vs-card--local {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-muted);
+}
+.kae-vs-card h3 {
+    font-size: var(--fs-xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+}
+.kae-vs-card--korea h3 { color: #fff; }
+.kae-vs-card--local h3 { color: var(--c-text); }
+.kae-vs-list { list-style: none; padding: 0; margin: 0; }
+.kae-vs-list li {
+    padding: 0.65rem 0;
+    border-top: 1px solid currentColor;
+    border-color: rgba(255,255,255,0.10);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.kae-vs-card--local .kae-vs-list li { border-color: var(--c-border); }
+.kae-vs-list li:first-child { border-top: 0; }
+.kae-vs-list li::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+}
+.kae-vs-card--korea .kae-vs-list li::before {
+    background: var(--c-red);
+    box-shadow: 0 0 0 3px rgba(205,46,58,0.20);
+}
+.kae-vs-card--local .kae-vs-list li::before {
+    background: var(--c-border);
+}
+
+/* --- Trust badges row (mock "inspected by / shipped via" partners) --- */
+.kae-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem 2rem;
+    color: var(--c-text-subtle);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+.kae-badge-row > * {
+    opacity: 0.7;
+    transition: opacity var(--t-base);
+}
+.kae-badge-row > *:hover { opacity: 1; }
+.kae-badge-row .badge-chip {
+    background: var(--c-bg-soft);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-full);
+    padding: 0.45rem 1rem;
+    font-size: var(--fs-sm);
+}
+
+/* --- Bigger hero (v2) --- */
+.kae-home-hero h1 {
+    font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+}
+.kae-home-hero p.lead {
+    font-size: clamp(1.05rem, 1vw + 0.85rem, 1.35rem);
+    max-width: 60ch;
+}
+.kae-home-hero {
+    padding-block: clamp(4rem, 7vw, 7rem) clamp(3rem, 5vw, 5rem);
+}
+.kae-home-hero .kae-eyebrow {
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--r-full);
+    letter-spacing: 0.18em;
+    font-size: var(--fs-xs);
+}
+.kae-home-hero .kae-eyebrow::before { display: none; }
+
+/* --- Hero CTA buttons larger + sharper --- */
+.kae-home-hero .btn-lg {
+    padding: 1rem 1.75rem;
+    font-size: var(--fs-lg);
+    border-radius: var(--r-md);
+}
+
+/* --- Vehicle card v2: sharper, more confident --- */
+.kae-card .card-body { padding: 1.25rem 1.4rem; }
+.kae-card .card-body h3 {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--c-navy);
+}
+.kae-card .card-body .fs-5 {
+    font-size: 1.4rem !important;
+    font-weight: 800;
+    color: var(--c-red);
+}
+.kae-card-media { aspect-ratio: 4 / 3; }
+.kae-card-badge {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.7rem;
+}
+
+/* --- Big CTA card (between sections) --- */
+.kae-cta-card {
+    background: linear-gradient(135deg, var(--c-navy) 0%, var(--c-navy-700) 100%);
+    border-radius: var(--r-lg);
+    padding: clamp(2rem, 4vw, 3.5rem);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.kae-cta-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 60%; height: 200%;
+    background: radial-gradient(closest-side, rgba(205,46,58,0.35), transparent 70%);
+    pointer-events: none;
+}
+.kae-cta-card h2 {
+    color: #fff;
+    font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+.kae-cta-card p { color: rgba(255,255,255,0.78); margin-bottom: 1.5rem; position: relative; }
+.kae-cta-card .btn { position: relative; }
+
+/* --- Vehicle detail v2: stronger sidebar, bigger price --- */
+.kae-detail-sidebar-v2 {
+    position: sticky;
+    top: 1rem;
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-1);
+}
+.kae-detail-sidebar-v2 .kae-eyebrow {
+    color: var(--c-text-muted);
+}
+.kae-detail-sidebar-v2 .kae-eyebrow::before {
+    background: var(--c-text-muted);
+}
+.kae-detail-title {
+    font-size: clamp(1.4rem, 1.5vw + 0.6rem, 1.8rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--c-navy);
+    margin-bottom: 0.5rem;
+}
+.kae-detail-price-v2 {
+    background: var(--c-bg-soft);
+    border-radius: var(--r-md);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.kae-detail-price-label {
+    font-size: var(--fs-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--c-text-muted);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+.kae-detail-price-value {
+    font-size: clamp(2rem, 3vw + 0.5rem, 2.6rem);
+    font-weight: 800;
+    color: var(--c-red);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+}
+.kae-detail-price-dzd {
+    font-size: var(--fs-sm);
+    color: var(--c-text-muted);
+    margin-top: 0.35rem;
+    font-variant-numeric: tabular-nums;
+}
+
+/* --- Cookie consent banner --- */
+.kae-cookie-banner {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    background: var(--c-navy-900);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 1rem 0;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    z-index: 1050;
+    border-top: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 -12px 32px rgba(10, 26, 47, 0.30);
+    transform: translateY(100%);
+    transition: transform var(--t-slow) var(--e-out);
+}
+.kae-cookie-banner.is-visible { transform: translateY(0); }
+.kae-cookie-banner h4 { color: #fff; }
+.kae-cookie-banner .btn-link:hover { color: #fff !important; }

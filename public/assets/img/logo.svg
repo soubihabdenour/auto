@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" role="img" aria-label="Korea Auto Export">
+    <!-- ===== Mark ===== -->
+    <g transform="translate(0,0)">
+        <rect width="64" height="64" rx="14" fill="#0A1A2F"/>
+        <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="rgba(255,255,255,0.06)"/>
+        <rect x="17" y="14" width="5" height="36" rx="1.5" fill="#ffffff"/>
+        <path d="M22 32 L40 14 L46 14 L26 34 Z" fill="#ffffff"/>
+        <path d="M22 32 L40 50 L46 50 L26 30 Z" fill="#CD2E3A"/>
+    </g>
+
+    <!-- ===== Wordmark ===== -->
+    <g transform="translate(80, 0)" font-family="Inter, system-ui, -apple-system, 'Segoe UI', sans-serif" fill="#0A1A2F">
+        <text x="0" y="30" font-size="20" font-weight="800" letter-spacing="0.02em">KOREA AUTO</text>
+        <text x="0" y="50" font-size="13" font-weight="500" letter-spacing="0.32em" fill="#5B6877">EXPORT</text>
+    </g>
+</svg>
