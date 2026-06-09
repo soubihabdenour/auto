@@ -7,7 +7,9 @@ use App\Core\Container;
 use App\Core\Database;
 use App\Core\Session;
 use App\Repositories\LeadRepository;
+use App\Repositories\ReservationRepository;
 use App\Repositories\SettingRepository;
+use App\Repositories\VehicleRepository;
 use App\Services\Auth\AuthService;
 use App\Services\Estimate\ImportCostEstimator;
 use App\Services\Image\ImageProcessor;
@@ -16,6 +18,9 @@ use App\Services\Lead\WhatsAppLinkBuilder;
 use App\Services\Mailer\LogMailer;
 use App\Services\Mailer\MailerInterface;
 use App\Services\Mailer\SmtpMailer;
+use App\Services\Reservation\ReservationMailer;
+use App\Services\Reservation\ReservationReferenceGenerator;
+use App\Services\Reservation\ReservationService;
 use App\Services\Setting\SettingService;
 use App\Services\Storage\LocalStorage;
 use App\Services\Storage\StorageInterface;
@@ -74,6 +79,27 @@ return function (Container $container, Config $config): void {
 
     $container->singleton(ImageProcessor::class, function (Container $c): ImageProcessor {
         return new ImageProcessor($c->get(StorageInterface::class));
+    });
+
+    $container->singleton(ReservationReferenceGenerator::class, function (Container $c): ReservationReferenceGenerator {
+        return new ReservationReferenceGenerator($c->get(ReservationRepository::class));
+    });
+
+    $container->singleton(ReservationMailer::class, function (Container $c): ReservationMailer {
+        return new ReservationMailer(
+            $c->get(MailerInterface::class),
+            $c->get(SettingService::class),
+        );
+    });
+
+    $container->singleton(ReservationService::class, function (Container $c): ReservationService {
+        return new ReservationService(
+            $c->get(ReservationRepository::class),
+            $c->get(VehicleRepository::class),
+            $c->get(ReservationReferenceGenerator::class),
+            $c->get(SettingService::class),
+            $c->get(Database::class),
+        );
     });
 
     $container->singleton(ImportCostEstimator::class, function (Container $c): ImportCostEstimator {

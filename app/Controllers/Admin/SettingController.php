@@ -36,6 +36,14 @@ final class SettingController
             'estimator_tva_rate', 'estimator_service_fee_flat_usd',
             'estimator_service_fee_percent', 'fx_usd_to_dzd',
         ],
+        'Reservations' => [
+            'reservation_default_deposit_usd',
+            'reservation_expiry_hours',
+            'reservation_admin_notification_email',
+            'reservation_bank_instructions_ar',
+            'reservation_bank_instructions_fr',
+            'reservation_bank_instructions_en',
+        ],
         'Social' => ['social_facebook', 'social_instagram', 'social_tiktok'],
         'Analytics' => [
             'analytics_plausible_domain',

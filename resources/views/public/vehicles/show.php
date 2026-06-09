@@ -103,11 +103,17 @@ $notes_lang = 'notes_' . $locale;
                             data-lead-type="quotation">
                         <?= e(t('vehicle.detail.cta.quote')) ?> →
                     </button>
-                    <button type="button" class="btn btn-outline-dark btn-lg"
-                            data-bs-toggle="modal" data-bs-target="#kae-lead-modal"
-                            data-lead-type="reservation">
-                        📌 <?= e(t('vehicle.detail.cta.reserve')) ?>
-                    </button>
+                    <?php $reservable = ($vehicle['status'] ?? '') === 'available'; ?>
+                    <?php if ($reservable): ?>
+                        <a href="<?= e(locale_url('/vehicles/' . $vehicle['slug'] . '/reserve')) ?>"
+                           class="btn btn-outline-dark btn-lg">
+                            📌 <?= e(t('vehicle.detail.cta.reserve')) ?>
+                        </a>
+                    <?php else: ?>
+                        <button type="button" class="btn btn-outline-secondary btn-lg" disabled>
+                            📌 <?= e(t('vehicle.detail.cta.reserve_unavailable')) ?>
+                        </button>
+                    <?php endif; ?>
                 </div>
             </aside>
         </div>

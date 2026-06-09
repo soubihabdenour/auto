@@ -5,12 +5,14 @@ use App\Controllers\Admin\AuthController as AdminAuth;
 use App\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Controllers\Admin\LeadController as AdminLead;
 use App\Controllers\Admin\SettingController as AdminSetting;
+use App\Controllers\Admin\ReservationController as AdminReservation;
 use App\Controllers\Admin\TestimonialController as AdminTestimonial;
 use App\Controllers\Admin\VehicleController as AdminVehicle;
 use App\Controllers\Admin\VehicleImageController as AdminVehicleImage;
 use App\Controllers\Public\HomeController;
 use App\Controllers\Public\InquiryController;
 use App\Controllers\Public\PageController;
+use App\Controllers\Public\ReservationController;
 use App\Controllers\Public\VehicleController;
 use App\Middleware\AuthMiddleware;
 use App\Middleware\CsrfMiddleware;
@@ -57,6 +59,14 @@ return function (Router $router): void {
         $router->post('/vehicles/{id}/images/cover',   [AdminVehicleImage::class, 'setCover']);
         $router->delete('/vehicles/images/{imageId}',  [AdminVehicleImage::class, 'destroy']);
 
+        // Reservations
+        $router->get('/reservations',                   [AdminReservation::class, 'index'])->name('admin.reservations.index');
+        $router->get('/reservations/{id}',              [AdminReservation::class, 'show'])->name('admin.reservations.show');
+        $router->post('/reservations/{id}/confirm',     [AdminReservation::class, 'confirm'])->name('admin.reservations.confirm');
+        $router->post('/reservations/{id}/cancel',      [AdminReservation::class, 'cancel'])->name('admin.reservations.cancel');
+        $router->post('/reservations/{id}/convert',     [AdminReservation::class, 'convert'])->name('admin.reservations.convert');
+        $router->post('/reservations/{id}/note',        [AdminReservation::class, 'addNote'])->name('admin.reservations.note');
+
         // Leads
         $router->get('/leads',                    [AdminLead::class, 'index'])->name('admin.leads.index');
         $router->get('/leads/export',             [AdminLead::class, 'exportCsv'])->name('admin.leads.export');
@@ -96,6 +106,12 @@ return function (Router $router): void {
         $router->get('/vehicles',          [VehicleController::class, 'index'])->name('vehicles.index');
         $router->get('/vehicles/filter',   [VehicleController::class, 'filter'])->name('vehicles.filter');
         $router->get('/vehicles/{slug}',   [VehicleController::class, 'show'])->name('vehicles.show');
+
+        // Reservations (off-platform deposit flow)
+        $router->get('/vehicles/{slug}/reserve',  [ReservationController::class, 'create'])->name('reservations.create');
+        $router->post('/vehicles/{slug}/reserve', [ReservationController::class, 'store'])
+               ->middleware(RateLimitMiddleware::class)->name('reservations.store');
+        $router->get('/reservations/{reference}', [ReservationController::class, 'show'])->name('reservations.show');
 
         // Lead submission (rate-limited per IP/route)
         $router->post('/inquiry',          [InquiryController::class, 'store'])

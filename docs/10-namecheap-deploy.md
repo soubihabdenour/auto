@@ -274,6 +274,8 @@ Verify in your browser:
 
 cPanel → `Advanced` → `Cron Jobs`. Add:
 
+**Daily DB backup** (3:00 AM):
+
 | Field | Value |
 |---|---|
 | Minute  | 0 |
@@ -282,6 +284,17 @@ cPanel → `Advanced` → `Cron Jobs`. Add:
 | Month   | * |
 | Weekday | * |
 | Command | `cd $HOME/koreaautoexport && /usr/bin/php bin/backup.php >> storage/logs/backup.log 2>&1` |
+
+**Reservation expiry** (every hour — required for the off-platform reservation flow):
+
+| Field | Value |
+|---|---|
+| Minute  | 0 |
+| Hour    | * |
+| Day     | * |
+| Month   | * |
+| Weekday | * |
+| Command | `cd $HOME/koreaautoexport && /usr/bin/php bin/expire-reservations.php >> storage/logs/reservations.log 2>&1` |
 
 (Check `which php` over SSH — on some Namecheap plans PHP is at `/opt/cpanel/ea-php83/root/usr/bin/php`. Use whatever `which php` returns.)
 

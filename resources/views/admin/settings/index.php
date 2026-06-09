@@ -28,7 +28,7 @@ $errors = flash('_errors') ?? [];
                         $current = $values[$key]['value'] ?? '';
                         $type    = $values[$key]['type']  ?? 'string';
                         $colSize = in_array($type, ['int','float','bool'], true) ? 'col-md-4' : 'col-md-6';
-                        $isLong  = str_contains($key, 'message') || str_contains($key, 'tagline');
+                        $isLong  = str_contains($key, 'message') || str_contains($key, 'tagline') || str_contains($key, 'instructions');
                         ?>
                         <div class="col-12 <?= $isLong ? '' : $colSize ?>">
                             <label class="form-label" for="s-<?= e($key) ?>">

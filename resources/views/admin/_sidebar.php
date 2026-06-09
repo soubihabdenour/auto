@@ -18,6 +18,9 @@ $active = fn(string $p) => str_starts_with($path, $p) ? 'is-active' : '';
         <a class="kae-admin-nav-link <?= $active('/admin/leads') ?>" href="/admin/leads">
             <span class="kae-admin-nav-icon">📨</span> Leads
         </a>
+        <a class="kae-admin-nav-link <?= $active('/admin/reservations') ?>" href="/admin/reservations">
+            <span class="kae-admin-nav-icon">📌</span> Reservations
+        </a>
         <a class="kae-admin-nav-link <?= $active('/admin/testimonials') ?>" href="/admin/testimonials">
             <span class="kae-admin-nav-icon">★</span> Testimonials
         </a>

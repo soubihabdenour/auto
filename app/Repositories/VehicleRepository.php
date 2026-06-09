@@ -7,6 +7,13 @@ namespace App\Repositories;
 final class VehicleRepository extends BaseRepository
 {
     /**
+     * Statuses considered "live" on the public site. `pending_reservation`
+     * vehicles stay visible (with a badge); the design decision lives in
+     * the auto-memory and project docs.
+     */
+    public const PUBLIC_LISTABLE_STATUSES_SQL = "('available','pending_reservation')";
+
+    /**
      * Reusable SELECT body that joins everything needed for a vehicle card.
      */
     private function listSelect(string $locale): string
@@ -37,7 +44,7 @@ final class VehicleRepository extends BaseRepository
     public function findFeatured(int $limit, string $locale): array
     {
         $sql = $this->listSelect($locale) . "
-            WHERE v.status = 'available' AND v.is_featured = 1
+            WHERE v.status IN " . self::PUBLIC_LISTABLE_STATUSES_SQL . " AND v.is_featured = 1
             ORDER BY v.published_at DESC, v.id DESC
             LIMIT :lim
         ";
@@ -52,7 +59,7 @@ final class VehicleRepository extends BaseRepository
     public function findLatest(int $limit, string $locale): array
     {
         $sql = $this->listSelect($locale) . "
-            WHERE v.status = 'available'
+            WHERE v.status IN " . self::PUBLIC_LISTABLE_STATUSES_SQL . "
             ORDER BY v.published_at DESC, v.id DESC
             LIMIT :lim
         ";
@@ -127,7 +134,7 @@ final class VehicleRepository extends BaseRepository
      */
     private function buildWhere(VehicleSearchCriteria $c): array
     {
-        $w = ["v.status = 'available'"];
+        $w = ["v.status IN " . self::PUBLIC_LISTABLE_STATUSES_SQL];
         $p = [];
 
         if ($c->brandId)      { $w[] = 'v.brand_id = :brand_id';            $p[':brand_id'] = $c->brandId; }
@@ -159,7 +166,7 @@ final class VehicleRepository extends BaseRepository
     public function findBySlug(string $slug, string $locale): ?array
     {
         $sql = $this->listSelect($locale) . "
-            WHERE v.slug = :slug AND v.status IN ('available','reserved','sold')
+            WHERE v.slug = :slug AND v.status IN ('available','pending_reservation','reserved','sold')
             LIMIT 1
         ";
         $stmt = $this->db->pdo()->prepare($sql);
@@ -222,7 +229,7 @@ final class VehicleRepository extends BaseRepository
     public function findSimilar(int $vehicleId, int $brandId, int $bodyTypeId, string $locale, int $limit = 4): array
     {
         $sql = $this->listSelect($locale) . "
-            WHERE v.status = 'available' AND v.id != :id
+            WHERE v.status IN " . self::PUBLIC_LISTABLE_STATUSES_SQL . " AND v.id != :id
               AND (v.brand_id = :brand_id OR v.body_type_id = :body_type_id)
             ORDER BY (v.brand_id = :brand_id) DESC, v.published_at DESC
             LIMIT :lim
@@ -264,7 +271,7 @@ final class VehicleRepository extends BaseRepository
     public function findMostViewed(int $limit, string $locale): array
     {
         $sql = $this->listSelect($locale) . "
-            WHERE v.status = 'available'
+            WHERE v.status IN " . self::PUBLIC_LISTABLE_STATUSES_SQL . "
             ORDER BY v.views_count DESC, v.published_at DESC
             LIMIT :lim
         ";

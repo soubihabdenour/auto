@@ -17,7 +17,9 @@ $trans = t('vehicle.transmission.' . $vehicle['transmission']);
             <?php if (! empty($vehicle['is_featured'])): ?>
                 <span class="kae-card-badge"><?= e(t('common.badges.featured')) ?></span>
             <?php endif; ?>
-            <?php if (($vehicle['status'] ?? '') === 'reserved'): ?>
+            <?php if (($vehicle['status'] ?? '') === 'pending_reservation'): ?>
+                <span class="kae-card-badge kae-card-badge-warning"><?= e(t('vehicle.status.pending_reservation')) ?></span>
+            <?php elseif (($vehicle['status'] ?? '') === 'reserved'): ?>
                 <span class="kae-card-badge kae-card-badge-warning"><?= e(t('vehicle.status.reserved')) ?></span>
             <?php elseif (($vehicle['status'] ?? '') === 'sold'): ?>
                 <span class="kae-card-badge kae-card-badge-muted"><?= e(t('vehicle.status.sold')) ?></span>
