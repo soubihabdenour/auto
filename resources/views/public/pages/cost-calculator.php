@@ -14,6 +14,10 @@ $activeUsd  = $currency === 'usd';
 $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 0;
 ?>
 <?php $this->section('content'); ?>
+<style>
+    .kae-fee-excluded { opacity: 0.45; }
+    .kae-fee-excluded [data-row] { text-decoration: line-through; }
+</style>
 <section class="container py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-lg-10">
@@ -102,31 +106,49 @@ $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 
                         </div>
 
                         <div id="kae-cc-body" <?= $price_usd === null ? 'style="display:none"' : '' ?>>
-                            <h2 class="h6 fw-bold mb-3"><?= e(t('pages.cost_calculator.breakdown_title')) ?></h2>
+                            <div class="d-flex justify-content-between align-items-baseline mb-2">
+                                <h2 class="h6 fw-bold mb-0"><?= e(t('pages.cost_calculator.breakdown_title')) ?></h2>
+                                <small class="text-muted"><?= e(t('pages.cost_calculator.toggle_hint')) ?></small>
+                            </div>
                             <dl class="mb-0">
-                                <div class="d-flex justify-content-between py-2">
+                                <div class="d-flex justify-content-between py-2" data-fee-row="vehicle">
                                     <dt class="text-muted fw-normal"><?= e(t('vehicle.detail.cost.vehicle')) ?></dt>
                                     <dd class="mb-0 fw-semibold" data-row="vehicle_usd">
                                         <?= $estimate ? e(format_price((float) $estimate['vehicle_usd'])) : '—' ?>
                                     </dd>
                                 </div>
-                                <div class="d-flex justify-content-between py-2 border-top">
-                                    <dt class="text-muted fw-normal"><?= e(t('vehicle.detail.cost.shipping')) ?></dt>
-                                    <dd class="mb-0 fw-semibold" data-row="shipping_usd">
+                                <div class="d-flex justify-content-between align-items-center py-2 border-top" data-fee-row="shipping">
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input kae-fee-toggle" type="checkbox" id="fee-shipping" data-fee="shipping" checked>
+                                        <label class="form-check-label text-muted fw-normal" for="fee-shipping">
+                                            <?= e(t('vehicle.detail.cost.shipping')) ?>
+                                        </label>
+                                    </div>
+                                    <div class="fw-semibold" data-row="shipping_usd">
                                         <?= $estimate ? e(format_price((float) $estimate['shipping_usd'])) : '—' ?>
-                                    </dd>
+                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-between py-2 border-top">
-                                    <dt class="text-muted fw-normal"><?= e(t('vehicle.detail.cost.customs')) ?></dt>
-                                    <dd class="mb-0 fw-semibold" data-row="customs_usd">
+                                <div class="d-flex justify-content-between align-items-center py-2 border-top" data-fee-row="customs">
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input kae-fee-toggle" type="checkbox" id="fee-customs" data-fee="customs" checked>
+                                        <label class="form-check-label text-muted fw-normal" for="fee-customs">
+                                            <?= e(t('vehicle.detail.cost.customs')) ?>
+                                        </label>
+                                    </div>
+                                    <div class="fw-semibold" data-row="customs_usd">
                                         <?= $estimate ? e(format_price((float) $estimate['customs_usd'])) : '—' ?>
-                                    </dd>
+                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-between py-2 border-top">
-                                    <dt class="text-muted fw-normal"><?= e(t('vehicle.detail.cost.service_fee')) ?></dt>
-                                    <dd class="mb-0 fw-semibold" data-row="service_fee_usd">
+                                <div class="d-flex justify-content-between align-items-center py-2 border-top" data-fee-row="service">
+                                    <div class="form-check m-0">
+                                        <input class="form-check-input kae-fee-toggle" type="checkbox" id="fee-service" data-fee="service" checked>
+                                        <label class="form-check-label text-muted fw-normal" for="fee-service">
+                                            <?= e(t('vehicle.detail.cost.service_fee')) ?>
+                                        </label>
+                                    </div>
+                                    <div class="fw-semibold" data-row="service_fee_usd">
                                         <?= $estimate ? e(format_price((float) $estimate['service_fee_usd'])) : '—' ?>
-                                    </dd>
+                                    </div>
                                 </div>
                                 <div class="d-flex justify-content-between py-3 border-top mt-2">
                                     <dt class="fw-bold"><?= e(t('vehicle.detail.cost.total_usd')) ?></dt>
@@ -225,13 +247,26 @@ $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 
         return checked ? checked.value : 'usd';
     }
 
-    function estimate(vehicleUsd) {
+    function readIncludes() {
+        return {
+            shipping: document.getElementById('fee-shipping')?.checked ?? true,
+            customs:  document.getElementById('fee-customs')?.checked  ?? true,
+            service:  document.getElementById('fee-service')?.checked  ?? true,
+        };
+    }
+
+    function estimate(vehicleUsd, includes) {
         const vehicle  = Math.max(0, vehicleUsd);
-        const shipping = rates.shipping_base_usd;
-        let   customs  = (vehicle + shipping) * rates.customs_rate;
-        const tva      = (vehicle + shipping + customs) * rates.tva_rate;
-        customs += tva;
-        const service  = rates.service_fee_flat_usd + (vehicle * rates.service_fee_percent);
+        const shipping = includes.shipping ? rates.shipping_base_usd : 0;
+        let   customs  = 0;
+        if (includes.customs) {
+            customs = (vehicle + shipping) * rates.customs_rate;
+            const tva = (vehicle + shipping + customs) * rates.tva_rate;
+            customs += tva;
+        }
+        const service  = includes.service
+            ? rates.service_fee_flat_usd + (vehicle * rates.service_fee_percent)
+            : 0;
         const totalUsd = vehicle + shipping + customs + service;
         return {
             vehicle_usd:     vehicle,
@@ -242,6 +277,16 @@ $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 
             total_dzd:       totalUsd * rates.fx_usd_to_dzd,
             total_krw:       totalUsd * rates.fx_usd_to_krw,
         };
+    }
+
+    // Grey-out excluded rows so the breakdown explains why a line is $0.
+    function applyExcludedStyling(includes) {
+        const map = { shipping: 'shipping', customs: 'customs', service: 'service' };
+        Object.entries(map).forEach(([key, attr]) => {
+            const row = document.querySelector(`[data-fee-row="${attr}"]`);
+            if (!row) return;
+            row.classList.toggle('kae-fee-excluded', !includes[key]);
+        });
     }
 
     function render() {
@@ -262,7 +307,9 @@ $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 
 
         empty.style.display = 'none';
         body.style.display  = '';
-        const e = estimate(usd);
+        const includes = readIncludes();
+        applyExcludedStyling(includes);
+        const e = estimate(usd, includes);
         result.querySelector('[data-row="vehicle_usd"]').textContent     = fmtUsd.format(e.vehicle_usd);
         result.querySelector('[data-row="shipping_usd"]').textContent    = fmtUsd.format(e.shipping_usd);
         result.querySelector('[data-row="customs_usd"]').textContent     = fmtUsd.format(e.customs_usd);
@@ -286,6 +333,7 @@ $usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 
         timer = setTimeout(render, 120);
     });
     curRadios.forEach(r => r.addEventListener('change', () => { applyCurrencyUI(); render(); }));
+    document.querySelectorAll('.kae-fee-toggle').forEach(t => t.addEventListener('change', render));
 
     applyCurrencyUI();
     if (priceEl.value !== '') render();

@@ -158,6 +158,7 @@ return [
             'total_manwon' => 'Total (만원)',
         ],
         'equivalent'      => 'Équivalent',
+        'toggle_hint'     => 'Décochez pour exclure un frais',
         'fx_title'        => 'Convertisseur rapide (sans frais)',
         'fx_subtitle'     => 'Saisissez dans n\'importe quel champ — les deux autres se mettent à jour automatiquement. Conversion pure, sans transport ni douane.',
         'breakdown_title' => 'Coût rendu estimé',

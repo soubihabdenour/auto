@@ -158,6 +158,7 @@ return [
             'total_manwon' => 'Total (만원)',
         ],
         'equivalent'      => 'Equivalent',
+        'toggle_hint'     => 'Uncheck to exclude a fee',
         'fx_title'        => 'Quick currency converter (no fees)',
         'fx_subtitle'     => 'Type in any field — the other two update automatically. Pure FX, no shipping or customs.',
         'breakdown_title' => 'Estimated landed cost',
