@@ -151,8 +151,8 @@ return [
             'tva'          => 'TVA',
             'service_flat' => 'Service fee (flat)',
             'service_pct'  => 'Service fee (% of price)',
-            'fx_dzd'       => 'USD → DZD',
-            'fx_krw'       => 'USD → 만원',
+            'fx_dzd'       => 'USD ↔ DZD',
+            'fx_krw'       => 'USD ↔ 만원',
         ],
         'rows' => [
             'total_manwon' => 'Total (만원)',

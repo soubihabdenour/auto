@@ -110,7 +110,7 @@ return function (Container $container, Config $config): void {
             tvaRate:            (float) $s->get('estimator_tva_rate', 0.19),
             serviceFeeFlatUsd:  (float) $s->get('estimator_service_fee_flat_usd', 500.0),
             serviceFeePercent:  (float) $s->get('estimator_service_fee_percent', 0.02),
-            fxUsdToDzd:         (float) $s->get('fx_usd_to_dzd', 135.0),
+            fxUsdToDzd:         (float) $s->get('fx_usd_to_dzd', 240.0),
         );
     });
 };

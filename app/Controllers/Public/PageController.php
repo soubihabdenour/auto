@@ -113,8 +113,8 @@ final class PageController
             'tva_rate'              => (float) $this->settings->get('estimator_tva_rate', 0.19),
             'service_fee_flat_usd'  => (float) $this->settings->get('estimator_service_fee_flat_usd', 500.0),
             'service_fee_percent'   => (float) $this->settings->get('estimator_service_fee_percent', 0.02),
-            'fx_usd_to_dzd'         => (float) $this->settings->get('fx_usd_to_dzd', 135.0),
-            'fx_usd_to_krw'         => (float) $this->settings->get('fx_usd_to_krw', 1380.0),
+            'fx_usd_to_dzd'         => (float) $this->settings->get('fx_usd_to_dzd', 240.0),
+            'fx_usd_to_krw'         => (float) $this->settings->get('fx_usd_to_krw', 1519.68),
         ];
 
         $currency = strtolower((string) $request->input('currency', 'usd'));

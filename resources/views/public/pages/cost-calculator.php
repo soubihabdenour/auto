@@ -10,7 +10,8 @@
  */
 $this->extends('layouts/public');
 $activeUsd  = $currency === 'usd';
-$manwonRate = $rates['fx_usd_to_krw'] / 10000;   // 1380 KRW → 0.138 만원 per USD → display as "138 만원 / 1 USD"
+// People quote in 만원 — show "1만원 = $X" instead of "1 USD = 0.15 만원" which is awkward to read.
+$usdPerManwon = $rates['fx_usd_to_krw'] > 0 ? 10000 / $rates['fx_usd_to_krw'] : 0;
 ?>
 <?php $this->section('content'); ?>
 <section class="container py-5">
@@ -77,9 +78,9 @@ $manwonRate = $rates['fx_usd_to_krw'] / 10000;   // 1380 KRW → 0.138 만원 pe
                             <dt class="col-7 text-muted"><?= e(t('pages.cost_calculator.rates.service_pct')) ?></dt>
                             <dd class="col-5 text-end"><?= e(number_format($rates['service_fee_percent'] * 100, 1)) ?>%</dd>
                             <dt class="col-7 text-muted"><?= e(t('pages.cost_calculator.rates.fx_dzd')) ?></dt>
-                            <dd class="col-5 text-end"><?= e(number_format($rates['fx_usd_to_dzd'], 2)) ?> DA</dd>
+                            <dd class="col-5 text-end">1 USD = <?= e(number_format($rates['fx_usd_to_dzd'], 0)) ?> DA</dd>
                             <dt class="col-7 text-muted"><?= e(t('pages.cost_calculator.rates.fx_krw')) ?></dt>
-                            <dd class="col-5 text-end"><?= e(number_format($manwonRate, 2)) ?> 만원</dd>
+                            <dd class="col-5 text-end">1만원 ≈ $<?= e(number_format($usdPerManwon, 2)) ?></dd>
                         </dl>
 
                         <noscript>
@@ -171,7 +172,7 @@ $manwonRate = $rates['fx_usd_to_krw'] / 10000;   // 1380 KRW → 0.138 만원 pe
                 <div class="d-flex justify-content-between align-items-baseline mb-2 flex-wrap gap-2">
                     <h2 class="h6 fw-bold mb-0"><?= e(t('pages.cost_calculator.fx_title')) ?></h2>
                     <small class="text-muted">
-                        1 USD = <?= e(number_format($manwonRate, 2)) ?> 만원
+                        1만원 ≈ $<?= e(number_format($usdPerManwon, 2)) ?>
                         · 1 USD = <?= e(number_format($rates['fx_usd_to_dzd'], 0)) ?> DA
                     </small>
                 </div>
