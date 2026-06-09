@@ -25,6 +25,7 @@ $nativeNames = (array) config('locales.native', []);
                     <li class="mb-1"><a href="<?= e(locale_url('/vehicles')) ?>"><?= e(t('common.nav.vehicles')) ?></a></li>
                     <li class="mb-1"><a href="<?= e(locale_url('/request-vehicle')) ?>"><?= e(t('common.cta.request_vehicle')) ?></a></li>
                     <li class="mb-1"><a href="<?= e(locale_url('/import-process')) ?>"><?= e(t('common.nav.process')) ?></a></li>
+                    <li class="mb-1"><a href="<?= e(locale_url('/cost-calculator')) ?>"><?= e(t('common.nav.cost_calculator')) ?></a></li>
                 </ul>
             </div>
 

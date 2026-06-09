@@ -18,6 +18,7 @@ use App\Services\Auth\AuthService;
 use App\Services\Storage\StorageInterface;
 use App\Services\Vehicle\VehicleAdminWriter;
 use App\Services\Vehicle\VehicleFormRules;
+use App\Services\Vehicle\VinDecoder;
 
 final class VehicleController
 {
@@ -31,6 +32,7 @@ final class VehicleController
         private AuthService        $auth,
         private StorageInterface   $storage,
         private VehicleAdminWriter $writer,
+        private VinDecoder         $vinDecoder,
     ) {}
 
     public function index(Request $request): Response
@@ -162,6 +164,64 @@ final class VehicleController
         );
         $this->session->flash('flash', 'Vehicle archived. Public pages will return 404.');
         return Response::redirect('/admin/vehicles');
+    }
+
+    /**
+     * AJAX: decode a VIN via NHTSA vPIC and return JSON hints the form
+     * can use to pre-fill brand/model/year/specs.
+     *
+     * Brand/model resolution: matched case-insensitively against rows we
+     * already have in the DB. If no match, the corresponding *_id is null
+     * and the front-end shows a warning so the admin can add the row.
+     */
+    public function decodeVin(Request $request): Response
+    {
+        $vin = (string) $request->input('vin', '');
+        try {
+            $decoded = $this->vinDecoder->decode($vin);
+        } catch (\Throwable $e) {
+            return Response::json(['error' => $e->getMessage()], 422);
+        }
+
+        $brandId = null;
+        $modelId = null;
+        $matched = ['brand' => null, 'model' => null];
+
+        if ($decoded['raw_make'] !== null) {
+            foreach ($this->brands->allActive() as $b) {
+                if (strcasecmp((string) $b['name'], $decoded['raw_make']) === 0) {
+                    $brandId = (int) $b['id'];
+                    $matched['brand'] = (string) $b['name'];
+                    break;
+                }
+            }
+        }
+        if ($brandId !== null && $decoded['raw_model'] !== null) {
+            foreach ($this->models->byBrand($brandId) as $m) {
+                if (strcasecmp((string) $m['name'], $decoded['raw_model']) === 0) {
+                    $modelId = (int) $m['id'];
+                    $matched['model'] = (string) $m['name'];
+                    break;
+                }
+            }
+        }
+
+        return Response::json([
+            'vin'             => $decoded['vin'],
+            'brand_id'        => $brandId,
+            'model_id'        => $modelId,
+            'year'            => $decoded['year'],
+            'fuel_type'       => $decoded['fuel_type'],
+            'transmission'    => $decoded['transmission'],
+            'drivetrain'      => $decoded['drivetrain'],
+            'engine_cc'       => $decoded['engine_cc'],
+            'engine_power_hp' => $decoded['engine_power_hp'],
+            'doors'           => $decoded['doors'],
+            'seats'           => $decoded['seats'],
+            'raw_make'        => $decoded['raw_make'],
+            'raw_model'       => $decoded['raw_model'],
+            'matched'         => $matched,
+        ]);
     }
 
     // ---------- Private helpers ----------

@@ -72,7 +72,7 @@ final class AuthService
             [(int) $user['id']]
         );
 
-        $this->writeAudit($user['id'], 'auth.login', null, null, $ip);
+        $this->writeAudit((int) $user['id'], 'auth.login', null, null, $ip);
         return true;
     }
 

@@ -72,6 +72,7 @@ INSERT INTO settings (`key`, `value`, `type`, is_public, description) VALUES
 ('estimator_service_fee_flat_usd',  '500',                                                      'float',  0, NULL),
 ('estimator_service_fee_percent',   '0.02',                                                     'float',  0, NULL),
 ('fx_usd_to_dzd',                   '135.00',                                                   'float',  1, 'Updated weekly'),
+('fx_usd_to_krw',                   '1380.00',                                                  'float',  1, 'Updated weekly — 1 USD = X KRW'),
 ('social_facebook',                 '',                                                         'string', 1, NULL),
 ('social_instagram',                '',                                                         'string', 1, NULL),
 ('social_tiktok',                   '',                                                         'string', 1, NULL),

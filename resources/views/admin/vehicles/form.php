@@ -66,7 +66,48 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
         <div class="alert alert-danger"><?= e($errors['_global'][0]) ?></div>
     <?php endif; ?>
     <?php if (! empty($errors) && empty($errors['_global'])): ?>
-        <div class="alert alert-warning">Please fix the highlighted errors below.</div>
+        <?php
+        // Friendly label + tab map for each rule we validate against.
+        $fieldLabels = [
+            'brand_id'        => ['label' => 'Brand',          'tab' => 'tab-info'],
+            'model_id'        => ['label' => 'Model',          'tab' => 'tab-info'],
+            'year'            => ['label' => 'Year',           'tab' => 'tab-info'],
+            'mileage_km'      => ['label' => 'Mileage (km)',   'tab' => 'tab-info'],
+            'transmission'    => ['label' => 'Transmission',   'tab' => 'tab-info'],
+            'fuel_type'       => ['label' => 'Fuel',           'tab' => 'tab-info'],
+            'drivetrain'      => ['label' => 'Drivetrain',     'tab' => 'tab-info'],
+            'price_usd'       => ['label' => 'Price (USD)',    'tab' => 'tab-info'],
+            'status'          => ['label' => 'Status',         'tab' => 'tab-info'],
+            'body_type_id'    => ['label' => 'Body type',      'tab' => 'tab-info'],
+            'vin'             => ['label' => 'VIN',            'tab' => 'tab-info'],
+            'engine_cc'       => ['label' => 'Engine (cc)',    'tab' => 'tab-info'],
+            'engine_power_hp' => ['label' => 'Power (hp)',     'tab' => 'tab-info'],
+            'exterior_color'  => ['label' => 'Exterior color', 'tab' => 'tab-info'],
+            'interior_color'  => ['label' => 'Interior color', 'tab' => 'tab-info'],
+            'doors'           => ['label' => 'Doors',          'tab' => 'tab-info'],
+            'seats'           => ['label' => 'Seats',          'tab' => 'tab-info'],
+            'location'        => ['label' => 'Location',       'tab' => 'tab-info'],
+            'title_ar'        => ['label' => 'Title (AR)',     'tab' => 'tab-trans'],
+            'title_fr'        => ['label' => 'Title (FR)',     'tab' => 'tab-trans'],
+            'title_en'        => ['label' => 'Title (EN)',     'tab' => 'tab-trans'],
+        ];
+        ?>
+        <div class="alert alert-warning">
+            <strong>Please fix the highlighted errors below:</strong>
+            <ul class="mb-0 mt-1">
+                <?php foreach ($errors as $field => $messages): ?>
+                    <?php
+                    if ($field === '_global') continue;
+                    $info = $fieldLabels[$field] ?? ['label' => $field, 'tab' => 'tab-info'];
+                    $msg  = is_array($messages) ? ($messages[0] ?? 'Invalid value.') : (string) $messages;
+                    ?>
+                    <li>
+                        <a href="#<?= e($info['tab']) ?>" data-kae-jump="<?= e($field) ?>" class="alert-link"><?= e($info['label']) ?></a>:
+                        <?= e($msg) ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
     <?php endif; ?>
 
     <ul class="nav nav-tabs kae-admin-tabs" id="vForm-tabs" role="tablist">
@@ -125,8 +166,14 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="vin">VIN</label>
-                            <input type="text" name="vin" id="vin" maxlength="40"
-                                   value="<?= e((string) $val('vin')) ?>" class="form-control">
+                            <div class="input-group">
+                                <input type="text" name="vin" id="vin" maxlength="40"
+                                       value="<?= e((string) $val('vin')) ?>" class="form-control"
+                                       autocapitalize="characters" autocomplete="off">
+                                <button type="button" class="btn btn-outline-dark" id="kae-vin-decode"
+                                        title="Auto-fill from VIN (NHTSA)">Decode</button>
+                            </div>
+                            <small class="text-muted d-block mt-1" id="kae-vin-feedback"></small>
                         </div>
                         <div class="col-md-3">
                             <label class="form-label" for="body_type_id">Body type</label>
@@ -244,9 +291,20 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label" for="title_<?= e($loc) ?>">Title (<?= strtoupper($loc) ?>) <?= $loc==='en' ? '*' : '' ?></label>
-                                        <input type="text" name="title_<?= e($loc) ?>" id="title_<?= e($loc) ?>"
-                                               value="<?= e((string) $val('title_' . $loc)) ?>"
-                                               class="form-control <?= isset($errors['title_'.$loc])?'is-invalid':'' ?>">
+                                        <?php if ($loc === 'en'): ?>
+                                            <div class="input-group">
+                                                <input type="text" name="title_<?= e($loc) ?>" id="title_<?= e($loc) ?>"
+                                                       value="<?= e((string) $val('title_' . $loc)) ?>"
+                                                       class="form-control <?= isset($errors['title_'.$loc])?'is-invalid':'' ?>">
+                                                <button type="button" class="btn btn-outline-dark" id="kae-title-autofill"
+                                                        title="Generate from brand, model, year, fuel, drivetrain">Auto-fill</button>
+                                            </div>
+                                            <small class="text-muted d-block mt-1">Example: <em>Hyundai Tucson 2021 Petrol AWD</em></small>
+                                        <?php else: ?>
+                                            <input type="text" name="title_<?= e($loc) ?>" id="title_<?= e($loc) ?>"
+                                                   value="<?= e((string) $val('title_' . $loc)) ?>"
+                                                   class="form-control <?= isset($errors['title_'.$loc])?'is-invalid':'' ?>">
+                                        <?php endif; ?>
                                     </div>
                                     <div class="col-12">
                                         <label class="form-label" for="description_<?= e($loc) ?>">Description</label>
@@ -375,6 +433,45 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
 </div>
 
 <script>
+// Auto-jump to the tab (and nested pill) containing the first invalid field
+// on page load. Also wires the error-list links to do the same on click.
+(function () {
+    const activatePaneAncestors = (el) => {
+        if (!el || !window.bootstrap?.Tab) return;
+        const panes = [];
+        let cur = el.closest('.tab-pane');
+        while (cur) {
+            panes.unshift(cur);
+            cur = cur.parentElement?.closest('.tab-pane');
+        }
+        panes.forEach(pane => {
+            const btn = document.querySelector(`[data-bs-target="#${pane.id}"]`);
+            if (btn) bootstrap.Tab.getOrCreateInstance(btn).show();
+        });
+    };
+
+    // 1. On load: jump to the first .is-invalid field.
+    const firstInvalid = document.querySelector('.is-invalid');
+    if (firstInvalid) {
+        activatePaneAncestors(firstInvalid);
+        try { firstInvalid.focus({ preventScroll: false }); } catch (_) {}
+    }
+
+    // 2. Click on an error-list link: jump to that field.
+    document.querySelectorAll('[data-kae-jump]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const field = link.dataset.kaeJump;
+            const target = document.getElementById(field) || document.querySelector(`[name="${field}"]`);
+            if (target) {
+                activatePaneAncestors(target);
+                try { target.focus({ preventScroll: false }); } catch (_) {}
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
+})();
+
 // Brand → Model dependent cascade
 (function () {
     const brand = document.getElementById('brand_id');
@@ -387,6 +484,165 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
     }
     brand.addEventListener('change', () => { model.value = ''; refresh(); });
     refresh();
+    window.__kaeRefreshModelCascade = refresh;
+})();
+
+// English title builder — fills #title_en from brand/model/year/fuel/drivetrain.
+// Pattern matches the demo titles: "Hyundai Tucson 2022 Diesel AWD".
+// FWD is the default and gets omitted; everything else is shown.
+function kaeBuildEnglishTitle() {
+    const sel = (id) => {
+        const el = document.getElementById(id);
+        if (!el || el.value === '') return '';
+        if (el.tagName === 'SELECT') {
+            const opt = el.options[el.selectedIndex];
+            return opt ? opt.text.trim() : '';
+        }
+        return el.value.trim();
+    };
+    const fuelLabels = {
+        petrol: 'Petrol', diesel: 'Diesel', hybrid: 'Hybrid',
+        phev: 'PHEV', electric: 'Electric', lpg: 'LPG',
+    };
+    const driveLabels = { rwd: 'RWD', awd: 'AWD', '4wd': '4WD' };
+
+    const brand = sel('brand_id');
+    const model = sel('model_id');
+    const year  = document.getElementById('year')?.value?.trim() || '';
+    const fuel  = document.getElementById('fuel_type')?.value || '';
+    const drive = document.getElementById('drivetrain')?.value || '';
+
+    if (!brand || !model || !year) return null;
+    const parts = [brand, model, year];
+    if (fuelLabels[fuel])  parts.push(fuelLabels[fuel]);
+    if (driveLabels[drive]) parts.push(driveLabels[drive]);   // 'fwd' falls through and is skipped
+    return parts.join(' ');
+}
+
+// Hook: Auto-fill button next to Title (EN).
+(function () {
+    const btn = document.getElementById('kae-title-autofill');
+    const titleEn = document.getElementById('title_en');
+    if (!btn || !titleEn) return;
+    btn.addEventListener('click', () => {
+        const t = kaeBuildEnglishTitle();
+        if (!t) {
+            alert('Pick a brand, model and year first.');
+            return;
+        }
+        titleEn.value = t;
+        titleEn.classList.remove('is-invalid');
+        titleEn.dispatchEvent(new Event('input',  { bubbles: true }));
+        titleEn.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+})();
+
+// VIN decoder (NHTSA vPIC via /admin/vehicles/decode-vin)
+(function () {
+    const btn      = document.getElementById('kae-vin-decode');
+    const vinInput = document.getElementById('vin');
+    const feedback = document.getElementById('kae-vin-feedback');
+    if (!btn || !vinInput) return;
+    const csrf = document.querySelector('input[name="_csrf"]')?.value || '';
+
+    const setField = (id, value) => {
+        if (value === null || value === undefined || value === '') return false;
+        const el = document.getElementById(id);
+        if (!el) return false;
+        // Don't clobber non-empty fields the admin may have already filled.
+        if (el.value && el.value.trim() !== '' && el.value !== '0') return false;
+        el.value = String(value);
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+        return true;
+    };
+
+    const setSelect = (id, value) => {
+        if (value === null || value === undefined || value === '') return false;
+        const el = document.getElementById(id);
+        if (!el) return false;
+        if (el.value && el.value !== '') return false;
+        const v = String(value);
+        if (Array.from(el.options).some(o => o.value === v)) {
+            el.value = v;
+            el.dispatchEvent(new Event('change', { bubbles: true }));
+            return true;
+        }
+        return false;
+    };
+
+    btn.addEventListener('click', async () => {
+        const vin = (vinInput.value || '').trim();
+        if (!vin) { feedback.textContent = 'Enter a VIN first.'; feedback.className = 'text-warning d-block mt-1'; return; }
+
+        btn.disabled = true;
+        const original = btn.textContent;
+        btn.textContent = 'Decoding…';
+        feedback.textContent = '';
+        feedback.className   = 'text-muted d-block mt-1';
+
+        try {
+            const form = new FormData();
+            form.append('_csrf', csrf);
+            form.append('vin', vin);
+            const res = await fetch('/admin/vehicles/decode-vin', {
+                method: 'POST',
+                body: form,
+                credentials: 'same-origin',
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                feedback.textContent = data.error || 'Decode failed.';
+                feedback.className   = 'text-danger d-block mt-1';
+                return;
+            }
+
+            const filled = [];
+            if (setSelect('brand_id', data.brand_id))           filled.push('brand');
+            // Brand change has refreshed the cascade; THEN set model.
+            if (setSelect('model_id', data.model_id))           filled.push('model');
+            if (setField('year',           data.year))          filled.push('year');
+            if (setSelect('fuel_type',     data.fuel_type))     filled.push('fuel');
+            if (setSelect('transmission',  data.transmission))  filled.push('transmission');
+            if (setSelect('drivetrain',    data.drivetrain))    filled.push('drivetrain');
+            if (setField('engine_cc',      data.engine_cc))     filled.push('engine cc');
+            if (setField('engine_power_hp',data.engine_power_hp)) filled.push('hp');
+            if (setField('doors',          data.doors))         filled.push('doors');
+            if (setField('seats',          data.seats))         filled.push('seats');
+
+            const warnings = [];
+            if (data.raw_make && data.brand_id === null) {
+                warnings.push(`Brand "${data.raw_make}" — not in your DB, add it under brands first.`);
+            }
+            if (data.raw_model && data.model_id === null && data.brand_id !== null) {
+                warnings.push(`Model "${data.raw_model}" — not in your DB under that brand, add it under models first.`);
+            }
+
+            // If the EN title is still empty and we have enough data, generate one.
+            const titleEn = document.getElementById('title_en');
+            if (titleEn && titleEn.value.trim() === '') {
+                const generated = kaeBuildEnglishTitle();
+                if (generated) {
+                    titleEn.value = generated;
+                    titleEn.classList.remove('is-invalid');
+                    titleEn.dispatchEvent(new Event('input',  { bubbles: true }));
+                    titleEn.dispatchEvent(new Event('change', { bubbles: true }));
+                    filled.push('title (EN)');
+                }
+            }
+
+            const summary = filled.length
+                ? `Filled: ${filled.join(', ')}.`
+                : 'Nothing pre-fillable was returned.';
+            feedback.textContent = warnings.length ? `${summary} ${warnings.join(' ')}` : summary;
+            feedback.className   = warnings.length ? 'text-warning d-block mt-1' : 'text-success d-block mt-1';
+        } catch (e) {
+            feedback.textContent = 'Network error while decoding VIN.';
+            feedback.className   = 'text-danger d-block mt-1';
+        } finally {
+            btn.disabled    = false;
+            btn.textContent = original;
+        }
+    });
 })();
 </script>
 <?php $this->endSection(); ?>

@@ -54,7 +54,7 @@ final class Request
         $this->routeParams = $params;
     }
 
-    public function route(string $key, ?string $default = null): ?string
+    public function route(string $key, mixed $default = null): mixed
     {
         return $this->routeParams[$key] ?? $default;
     }

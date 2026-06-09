@@ -34,7 +34,8 @@ final class SettingController
         'Cost estimator' => [
             'estimator_shipping_base_usd', 'estimator_customs_rate',
             'estimator_tva_rate', 'estimator_service_fee_flat_usd',
-            'estimator_service_fee_percent', 'fx_usd_to_dzd',
+            'estimator_service_fee_percent',
+            'fx_usd_to_dzd', 'fx_usd_to_krw',
         ],
         'Reservations' => [
             'reservation_default_deposit_usd',

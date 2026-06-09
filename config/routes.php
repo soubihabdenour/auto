@@ -46,11 +46,13 @@ return function (Router $router): void {
         'middleware' => [AuthMiddleware::class, CsrfMiddleware::class],
     ], function (Router $router) {
         $router->get('', [AdminDashboard::class, 'index'])->name('admin.dashboard');
+        $router->get('/regulations', [AdminDashboard::class, 'regulations'])->name('admin.regulations');
 
         // Vehicles
         $router->get('/vehicles',                 [AdminVehicle::class, 'index'])->name('admin.vehicles.index');
         $router->get('/vehicles/create',          [AdminVehicle::class, 'create'])->name('admin.vehicles.create');
         $router->post('/vehicles',                [AdminVehicle::class, 'store'])->name('admin.vehicles.store');
+        $router->post('/vehicles/decode-vin',     [AdminVehicle::class, 'decodeVin'])->name('admin.vehicles.decode-vin');
         $router->get('/vehicles/{id}/edit',       [AdminVehicle::class, 'edit'])->name('admin.vehicles.edit');
         $router->put('/vehicles/{id}',            [AdminVehicle::class, 'update'])->name('admin.vehicles.update');
         $router->delete('/vehicles/{id}',         [AdminVehicle::class, 'destroy'])->name('admin.vehicles.destroy');
@@ -95,6 +97,7 @@ return function (Router $router): void {
         $router->get('/',                  [HomeController::class, 'index'])->name('home');
         $router->get('/why-korea',         [PageController::class, 'whyKorea'])->name('why-korea');
         $router->get('/import-process',    [PageController::class, 'importProcess'])->name('import-process');
+        $router->get('/cost-calculator',   [PageController::class, 'costCalculator'])->name('cost-calculator');
         $router->get('/testimonials',      [PageController::class, 'testimonials'])->name('testimonials');
         $router->get('/about',             [PageController::class, 'about'])->name('about');
         $router->get('/contact',           [PageController::class, 'contact'])->name('contact');

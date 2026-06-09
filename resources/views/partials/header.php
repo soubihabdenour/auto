@@ -15,6 +15,7 @@
             <li class="nav-item"><a class="nav-link" href="<?= e(locale_url('/vehicles')) ?>"><?= e(t('common.nav.vehicles')) ?></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= e(locale_url('/why-korea')) ?>"><?= e(t('common.nav.why_korea')) ?></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= e(locale_url('/import-process')) ?>"><?= e(t('common.nav.process')) ?></a></li>
+            <li class="nav-item"><a class="nav-link" href="<?= e(locale_url('/cost-calculator')) ?>"><?= e(t('common.nav.cost_calculator')) ?></a></li>
             <li class="nav-item"><a class="nav-link" href="<?= e(locale_url('/contact')) ?>"><?= e(t('common.nav.contact')) ?></a></li>
         </ul>
 

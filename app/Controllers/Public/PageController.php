@@ -9,6 +9,7 @@ use App\Core\Response;
 use App\Core\View;
 use App\Repositories\BrandRepository;
 use App\Repositories\TestimonialRepository;
+use App\Services\Estimate\ImportCostEstimator;
 use App\Services\Seo\SitemapGenerator;
 use App\Services\Setting\SettingService;
 
@@ -20,6 +21,7 @@ final class PageController
         private BrandRepository       $brands,
         private SettingService        $settings,
         private SitemapGenerator      $sitemap,
+        private ImportCostEstimator   $estimator,
     ) {}
 
     public function sitemap(Request $request): Response
@@ -95,6 +97,56 @@ final class PageController
     public function privacy(Request $request): Response
     {
         return $this->render('public/pages/privacy', $request, t('pages.privacy.title'));
+    }
+
+    /**
+     * Interactive cost calculator. Renders the form server-side with the
+     * current rate settings inlined so the JS can recompute live without
+     * a round-trip; falling back to the server-side estimate when ?price=X
+     * is passed (or JS is disabled).
+     */
+    public function costCalculator(Request $request): Response
+    {
+        $rates = [
+            'shipping_base_usd'     => (float) $this->settings->get('estimator_shipping_base_usd', 1500.0),
+            'customs_rate'          => (float) $this->settings->get('estimator_customs_rate', 0.30),
+            'tva_rate'              => (float) $this->settings->get('estimator_tva_rate', 0.19),
+            'service_fee_flat_usd'  => (float) $this->settings->get('estimator_service_fee_flat_usd', 500.0),
+            'service_fee_percent'   => (float) $this->settings->get('estimator_service_fee_percent', 0.02),
+            'fx_usd_to_dzd'         => (float) $this->settings->get('fx_usd_to_dzd', 135.0),
+            'fx_usd_to_krw'         => (float) $this->settings->get('fx_usd_to_krw', 1380.0),
+        ];
+
+        $currency = strtolower((string) $request->input('currency', 'usd'));
+        if (! in_array($currency, ['usd', 'krw'], true)) {
+            $currency = 'usd';
+        }
+        $priceRaw = $request->input('price', '');
+        $priceIn  = is_numeric($priceRaw) ? max(0.0, (float) $priceRaw) : null;
+
+        // Normalise to USD for the estimator. 'krw' mode reads input as 만원
+        // (= 10,000 KRW per unit), which is how Koreans actually quote prices.
+        $priceUsd = null;
+        $priceKrw = null;
+        if ($priceIn !== null) {
+            if ($currency === 'krw') {
+                $priceKrw = $priceIn * 10000;
+                $priceUsd = $rates['fx_usd_to_krw'] > 0 ? $priceKrw / $rates['fx_usd_to_krw'] : null;
+            } else {
+                $priceUsd = $priceIn;
+                $priceKrw = $priceIn * $rates['fx_usd_to_krw'];
+            }
+        }
+        $estimate = $priceUsd !== null ? $this->estimator->estimate($priceUsd) : null;
+
+        return $this->render('public/pages/cost-calculator', $request, t('pages.cost_calculator.title'), [
+            'currency'  => $currency,
+            'price_in'  => $priceIn,
+            'price_usd' => $priceUsd,
+            'price_krw' => $priceKrw,
+            'estimate'  => $estimate,
+            'rates'     => $rates,
+        ]);
     }
 
     public function terms(Request $request): Response

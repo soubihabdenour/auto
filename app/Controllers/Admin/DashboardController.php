@@ -49,6 +49,18 @@ final class DashboardController
         return Response::html($html);
     }
 
+    /**
+     * Internal regulations / process reference. Read-only static content
+     * compiled in the view; the admin edits the view file (or, later, the
+     * settings) when something changes.
+     */
+    public function regulations(Request $request): Response
+    {
+        return Response::html($this->view->render('admin/regulations', [
+            'page_title' => 'Regulations · Admin',
+        ]));
+    }
+
     private function safe(\Closure $cb, mixed $fallback = []): mixed
     {
         try { return $cb(); }
