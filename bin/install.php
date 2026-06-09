@@ -77,11 +77,29 @@ function runSqlFile(\App\Core\Database $db, string $path, string $label): void
 
 function createOrUpdateAdmin(\App\Core\Database $db): void
 {
-    $email = promptDefault('Admin email', 'admin@koreaautoexport.dz');
-    $name  = promptDefault('Admin name', 'Site Administrator');
-    $pass  = promptPassword('Admin password (min 12 chars)');
+    // Non-interactive path: if ADMIN_EMAIL + ADMIN_PASSWORD are in the .env,
+    // skip the prompts and seed from there. Useful for cPanel deploys where
+    // running an interactive shell is annoying.
+    $envEmail = trim((string) env('ADMIN_EMAIL', ''));
+    $envPass  = (string) env('ADMIN_PASSWORD', '');
+    $fromEnv  = $envEmail !== '' && $envPass !== '';
+
+    if ($fromEnv) {
+        $email = $envEmail;
+        $name  = trim((string) env('ADMIN_NAME', 'Site Administrator')) ?: 'Site Administrator';
+        $pass  = $envPass;
+        echo "→ Using admin credentials from .env (ADMIN_EMAIL / ADMIN_PASSWORD)\n";
+    } else {
+        $email = promptDefault('Admin email', 'admin@koreaautoexport.dz');
+        $name  = promptDefault('Admin name', 'Site Administrator');
+        $pass  = promptPassword('Admin password (min 12 chars)');
+    }
+
     if (strlen($pass) < 12) {
         throw new RuntimeException('Password must be at least 12 characters.');
+    }
+    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        throw new RuntimeException("Admin email is not valid: {$email}");
     }
     $hash = password_hash($pass, PASSWORD_BCRYPT, ['cost' => 12]);
 
@@ -92,13 +110,20 @@ function createOrUpdateAdmin(\App\Core\Database $db): void
             [$hash, $name, 'admin', $existing['id']]
         );
         echo "→ Admin user updated: {$email}\n";
-        return;
+    } else {
+        $db->execute(
+            'INSERT INTO users (email, password_hash, name, role, is_active) VALUES (?, ?, ?, ?, 1)',
+            [$email, $hash, $name, 'admin']
+        );
+        echo "→ Admin user created: {$email}\n";
     }
-    $db->execute(
-        'INSERT INTO users (email, password_hash, name, role, is_active) VALUES (?, ?, ?, ?, 1)',
-        [$email, $hash, $name, 'admin']
-    );
-    echo "→ Admin user created: {$email}\n";
+
+    if ($fromEnv) {
+        echo "\n";
+        echo "⚠ Security note: ADMIN_PASSWORD is now in your .env in plain text.\n";
+        echo "   Once you've logged in successfully, remove the ADMIN_PASSWORD line\n";
+        echo "   (or replace its value) so a stolen .env can't recover it.\n";
+    }
 }
 
 function promptDefault(string $label, string $default): string

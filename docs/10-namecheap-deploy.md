@@ -201,7 +201,23 @@ MAIL_USER=noreply@koreaautoexport.dz
 MAIL_PASS=<email account password>
 MAIL_FROM_ADDRESS=noreply@koreaautoexport.dz
 MAIL_FROM_NAME="Korea Auto Export"
+
+# --- Admin seed credentials (read by bin/install.php) ---
+ADMIN_EMAIL=you@yourdomain.com
+ADMIN_NAME="Site Administrator"
+ADMIN_PASSWORD=<choose a strong password, min 12 chars>
 ```
+
+**Why ADMIN_PASSWORD lives in `.env`:** cPanel SSH is sometimes laggy or
+disabled, and the interactive prompt in `bin/install.php` is awkward over a
+flaky session. If the installer finds `ADMIN_EMAIL` + `ADMIN_PASSWORD` in
+`.env`, it skips the prompts and creates the admin straight from those
+values. You can always find the password in `~/koreaautoexport/.env` if
+you forget it.
+
+**After your first successful login**, clear `ADMIN_PASSWORD=` (leave it
+empty) so a leaked `.env` can't recover the password — the bcrypt hash in
+the `users` table is what's used for real auth from then on.
 
 Generate and install the app key:
 ```bash
@@ -222,19 +238,36 @@ cd ~/koreaautoexport
 php bin/install.php
 ```
 
-You'll see:
+**If you set `ADMIN_EMAIL` + `ADMIN_PASSWORD` in `.env`** (recommended for
+cPanel deploys), the installer runs straight through with no prompts:
+
 ```
 → Running schema (schema.sql) ... ok (17 statements)
 → Running reference seed (00_reference.sql) ... ok (X statements)
-Admin email [admin@koreaautoexport.dz]:        ← Enter your real admin email
-Admin name [Site Administrator]:               ← or press Enter to keep default
-Admin password (min 12 chars):                 ← TYPE A STRONG PASSWORD, IT WON'T ECHO
-→ Admin user created: admin@yourdomain.com
+→ Using admin credentials from .env (ADMIN_EMAIL / ADMIN_PASSWORD)
+→ Admin user created: you@yourdomain.com
+
+⚠ Security note: ADMIN_PASSWORD is now in your .env in plain text.
+   Once you've logged in successfully, remove the ADMIN_PASSWORD line
+   (or replace its value) so a stolen .env can't recover it.
 
 ✓ Done.
 ```
 
+**Otherwise** (interactive prompts):
+
+```
+Admin email [admin@koreaautoexport.dz]:        ← Enter your real admin email
+Admin name [Site Administrator]:               ← or press Enter to keep default
+Admin password (min 12 chars):                 ← TYPE A STRONG PASSWORD, IT WON'T ECHO
+→ Admin user created: admin@yourdomain.com
+```
+
 If you want demo data too (5 sample vehicles + 3 testimonials), use `--with-demo`.
+
+**Reset the admin later**: edit `.env` (set new `ADMIN_PASSWORD`) then
+run `php bin/install.php --admin-only` — it upserts by email and skips
+schema/seeds.
 
 ---
 
