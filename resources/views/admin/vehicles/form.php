@@ -58,6 +58,8 @@ $val = function (string $key, mixed $default = '') use ($old, $vehicle, $transla
             <?php if ($isEdit): ?>
                 <a href="/<?= e(config('locales.default')) ?>/vehicles/<?= e((string) $vehicle['slug']) ?>"
                    target="_blank" class="btn btn-outline-dark btn-sm">View public ↗</a>
+                <a href="/admin/proposals/vehicle/<?= (int) $vehicle['id'] ?>"
+                   target="_blank" class="btn btn-primary btn-sm">📄 Proposal PDF</a>
             <?php endif; ?>
         </div>
     </div>

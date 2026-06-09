@@ -4,6 +4,7 @@ use App\Core\Router;
 use App\Controllers\Admin\AuthController as AdminAuth;
 use App\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Controllers\Admin\LeadController as AdminLead;
+use App\Controllers\Admin\ProposalController as AdminProposal;
 use App\Controllers\Admin\SettingController as AdminSetting;
 use App\Controllers\Admin\ReservationController as AdminReservation;
 use App\Controllers\Admin\TestimonialController as AdminTestimonial;
@@ -31,6 +32,9 @@ return function (Router $router): void {
     // SEO endpoints
     $router->get('/sitemap.xml', [PageController::class, 'sitemap'])->name('sitemap');
     $router->get('/robots.txt',  [PageController::class, 'robots'])->name('robots');
+
+    // Public shareable proposal — HMAC-signed slug (no auth)
+    $router->get('/p/{slug}', [AdminProposal::class, 'publicShow'])->name('proposal.public');
 
     // ----- ADMIN  ---------------------------------------------------
     // Registered BEFORE the localized group so /admin doesn't accidentally
@@ -68,6 +72,9 @@ return function (Router $router): void {
         $router->post('/reservations/{id}/cancel',      [AdminReservation::class, 'cancel'])->name('admin.reservations.cancel');
         $router->post('/reservations/{id}/convert',     [AdminReservation::class, 'convert'])->name('admin.reservations.convert');
         $router->post('/reservations/{id}/note',        [AdminReservation::class, 'addNote'])->name('admin.reservations.note');
+
+        // Prospect proposal (print-to-PDF page)
+        $router->get('/proposals/vehicle/{id}',   [AdminProposal::class, 'show'])->name('admin.proposals.vehicle');
 
         // Leads
         $router->get('/leads',                    [AdminLead::class, 'index'])->name('admin.leads.index');

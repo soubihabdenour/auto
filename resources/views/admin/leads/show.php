@@ -57,12 +57,13 @@ $errors = flash('_errors') ?? [];
                     <div class="kae-card-header">Vehicle of interest</div>
                     <div class="kae-card-body">
                         <div class="fw-semibold"><?= e((string) $lead['vehicle_label']) ?></div>
-                        <div class="mt-2 d-flex gap-2">
+                        <div class="mt-2 d-flex gap-2 flex-wrap">
                             <?php if (! empty($lead['vehicle_slug'])): ?>
                                 <a href="/<?= e(config('locales.default')) ?>/vehicles/<?= e((string) $lead['vehicle_slug']) ?>" target="_blank" class="btn btn-sm btn-outline-dark">View public ↗</a>
                             <?php endif; ?>
                             <?php if (! empty($lead['vehicle_id'])): ?>
                                 <a href="/admin/vehicles/<?= (int) $lead['vehicle_id'] ?>/edit" class="btn btn-sm btn-outline-dark">Edit admin</a>
+                                <a href="/admin/proposals/vehicle/<?= (int) $lead['vehicle_id'] ?>?lead=<?= (int) $lead['id'] ?>" target="_blank" class="btn btn-sm btn-primary">📄 Proposal PDF</a>
                             <?php endif; ?>
                         </div>
                     </div>

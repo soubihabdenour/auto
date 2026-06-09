@@ -111,6 +111,28 @@ if (! function_exists('csrf_token')) {
     }
 }
 
+if (! function_exists('proposal_token')) {
+    /**
+     * Deterministic HMAC token for a shareable proposal URL. Same
+     * vehicle+lead pair always yields the same token; the secret is
+     * the APP_KEY, so without it the URL can't be guessed.
+     */
+    function proposal_token(int $vehicleId, int $leadId = 0): string
+    {
+        $secret = (string) env('APP_KEY', 'kae-fallback-secret');
+        return substr(hash_hmac('sha256', "v{$vehicleId}-l{$leadId}", $secret), 0, 16);
+    }
+}
+
+if (! function_exists('proposal_public_url')) {
+    /** Full absolute URL to the public-facing proposal page. */
+    function proposal_public_url(int $vehicleId, int $leadId = 0): string
+    {
+        $slug = $vehicleId . '-' . $leadId . '-' . proposal_token($vehicleId, $leadId);
+        return url('/p/' . $slug);
+    }
+}
+
 if (! function_exists('csrf_field')) {
     function csrf_field(): string
     {
