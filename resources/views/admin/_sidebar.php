@@ -5,7 +5,7 @@ $active = fn(string $p) => str_starts_with($path, $p) ? 'is-active' : '';
 ?>
 <aside class="kae-admin-sidebar">
     <a href="/admin" class="kae-admin-brand">
-        <img src="<?= asset('img/logo-light.svg') ?>" alt="Korea Auto Export" width="200" height="48">
+        <img src="<?= asset('img/logo-light.svg') ?>" alt="ADY Motors" width="200" height="48">
     </a>
 
     <nav class="kae-admin-nav" aria-label="primary">

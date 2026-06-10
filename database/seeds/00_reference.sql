@@ -1,5 +1,5 @@
 -- =============================================================
---  Korea Auto Export — Reference seed data (idempotent-friendly)
+--  ADY Motors — Reference seed data (idempotent-friendly)
 --  Run AFTER database/schema.sql
 --  Does NOT create admin user — that is handled by bin/install.php
 -- =============================================================
@@ -53,17 +53,17 @@ INSERT INTO pages (`key`, template) VALUES
 
 -- ---- Core settings ----------------------------------------
 INSERT INTO settings (`key`, `value`, `type`, is_public, description) VALUES
-('site_name',                       'Korea Auto Export',                                       'string', 1, 'Brand name'),
+('site_name',                       'ADY Motors',                                              'string', 1, 'Brand name'),
 ('site_tagline_ar',                 'استورد سيارتك الكورية مباشرة إلى الجزائر',                'string', 1, NULL),
 ('site_tagline_fr',                 'Importez votre voiture coréenne directement en Algérie',  'string', 1, NULL),
 ('site_tagline_en',                 'Import your Korean car directly to Algeria',              'string', 1, NULL),
-('contact_email',                   'contact@koreaautoexport.dz',                              'string', 1, NULL),
+('contact_email',                   'contact@devady.com',                                       'string', 1, NULL),
 ('contact_phone',                   '+213 000 000 000',                                        'string', 1, NULL),
 ('whatsapp_number',                 '+213000000000',                                           'string', 1, 'No spaces, no dashes'),
 ('whatsapp_default_message_ar',     'مرحبا، أنا مهتم بالسيارة:',                               'string', 1, NULL),
 ('whatsapp_default_message_fr',     'Bonjour, je suis intéressé par le véhicule:',             'string', 1, NULL),
 ('whatsapp_default_message_en',     'Hello, I am interested in the vehicle:',                  'string', 1, NULL),
-('lead_notification_email',         'leads@koreaautoexport.dz',                                'string', 0, 'Where new leads are mailed'),
+('lead_notification_email',         'leads@devady.com',                                         'string', 0, 'Where new leads are mailed'),
 ('default_locale',                  'ar',                                                       'string', 1, NULL),
 ('available_locales',               '["ar","fr","en"]',                                         'json',   1, NULL),
 ('estimator_shipping_base_usd',     '1500',                                                     'float',  0, NULL),
@@ -76,6 +76,6 @@ INSERT INTO settings (`key`, `value`, `type`, is_public, description) VALUES
 ('social_facebook',                 '',                                                         'string', 1, NULL),
 ('social_instagram',                '',                                                         'string', 1, NULL),
 ('social_tiktok',                   '',                                                         'string', 1, NULL),
-('analytics_plausible_domain',      '',                                                         'string', 0, 'e.g. koreaautoexport.dz'),
+('analytics_plausible_domain',      '',                                                         'string', 0, 'e.g. auto.devady.com'),
 ('analytics_ga4_id',                '',                                                         'string', 0, 'e.g. G-XXXXXXXXXX'),
 ('search_console_verification',     '',                                                         'string', 0, 'Google Search Console meta verification token');

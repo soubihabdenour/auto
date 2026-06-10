@@ -87,7 +87,7 @@ final class ProposalController
 
         // Business info
         $business = [
-            'name'     => (string) ($this->settings->get('site_name', 'Korea Auto Export') ?? 'Korea Auto Export'),
+            'name'     => (string) ($this->settings->get('site_name', 'ADY Motors') ?? 'ADY Motors'),
             'email'    => (string) ($this->settings->get('contact_email', '') ?? ''),
             'phone'    => (string) ($this->settings->get('contact_phone', '') ?? ''),
             'whatsapp' => (string) ($this->settings->get('whatsapp_number', '') ?? ''),

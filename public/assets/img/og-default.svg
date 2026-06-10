@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Korea Auto Export">
-    <!-- Background gradient -->
+<!-- ADY Motors — Open Graph default image (1200×630), shown when shared on FB/WA/X -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="ADY Motors">
     <defs>
         <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#0A1A2F"/>
-            <stop offset="0.55" stop-color="#142B4A"/>
-            <stop offset="1" stop-color="#0A1A2F"/>
+            <stop offset="0"    stop-color="#0A0A0A"/>
+            <stop offset="0.55" stop-color="#1A1A1A"/>
+            <stop offset="1"    stop-color="#0A0A0A"/>
         </linearGradient>
         <radialGradient id="glow" cx="0.85" cy="0.05" r="0.55">
-            <stop offset="0" stop-color="#CD2E3A" stop-opacity="0.35"/>
-            <stop offset="1" stop-color="#CD2E3A" stop-opacity="0"/>
+            <stop offset="0" stop-color="#0057FF" stop-opacity="0.30"/>
+            <stop offset="1" stop-color="#0057FF" stop-opacity="0"/>
         </radialGradient>
         <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M40 0 L0 0 0 40" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/>
@@ -18,26 +18,27 @@
     <rect width="1200" height="630" fill="url(#grid)"/>
     <rect width="1200" height="630" fill="url(#glow)"/>
 
-    <!-- Mark -->
+    <!-- Mark, scaled up 2.6× -->
     <g transform="translate(96,180) scale(2.6)">
-        <rect width="64" height="64" rx="14" fill="rgba(255,255,255,0.10)"/>
+        <rect width="64" height="64" rx="14" fill="rgba(255,255,255,0.08)"/>
         <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="rgba(255,255,255,0.20)"/>
-        <rect x="17" y="14" width="5" height="36" rx="1.5" fill="#ffffff"/>
-        <path d="M22 32 L40 14 L46 14 L26 34 Z" fill="#ffffff"/>
-        <path d="M22 32 L40 50 L46 50 L26 30 Z" fill="#CD2E3A"/>
+        <path d="M14 50 L26 14 L29 14 L41 50 L36 50 L33 41 L22 41 L19 50 Z" fill="#FFFFFF"/>
+        <rect x="22.5" y="35" width="10" height="3" fill="#FFFFFF"/>
+        <line x1="44" y1="26" x2="54" y2="26" stroke="#0057FF" stroke-width="3" stroke-linecap="square"/>
+        <line x1="44" y1="36" x2="56" y2="36" stroke="#0057FF" stroke-width="3" stroke-linecap="square"/>
     </g>
 
     <!-- Wordmark -->
-    <g font-family="Inter, system-ui, sans-serif" fill="#ffffff">
-        <text x="320" y="290" font-size="76" font-weight="800" letter-spacing="0.01em">KOREA AUTO</text>
-        <text x="320" y="356" font-size="38" font-weight="500" letter-spacing="0.30em" fill="rgba(255,255,255,0.70)">EXPORT</text>
+    <g font-family="Inter, system-ui, sans-serif" fill="#FFFFFF">
+        <text x="320" y="305" font-size="108" font-weight="800" letter-spacing="-0.02em">ADY</text>
+        <text x="320" y="368" font-size="34" font-weight="600" letter-spacing="0.30em" fill="rgba(255,255,255,0.70)">MOTORS</text>
     </g>
 
     <!-- Tagline -->
-    <text x="320" y="448" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="400" fill="rgba(255,255,255,0.78)" letter-spacing="0.01em">
-        Premium Korean cars · Direct import to Algeria
+    <text x="320" y="460" font-family="Inter, system-ui, sans-serif" font-size="32" font-weight="400" fill="rgba(255,255,255,0.78)" letter-spacing="0.01em">
+        Korean cars, delivered to Algeria.
     </text>
 
-    <!-- Bottom bar -->
-    <rect x="0" y="610" width="1200" height="20" fill="#CD2E3A"/>
+    <!-- Bottom accent bar -->
+    <rect x="0" y="610" width="1200" height="20" fill="#0057FF"/>
 </svg>

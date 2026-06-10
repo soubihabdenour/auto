@@ -53,7 +53,7 @@ return [
         'eyebrow'        => 'About us',
         'title'    => 'About us',
         'subtitle' => 'A team that combines Algerian experience with on-the-ground Korean knowledge.',
-        'body'     => 'Korea Auto Export was founded to bring Korean quality to the Algerian market with confidence and transparency. Our Busan team inspects every car in person; our Algeria team handles pickup and last-mile delivery.',
+        'body'     => 'ADY Motors was founded to bring Korean quality to the Algerian market with confidence and transparency. Our Busan team inspects every car in person; our Algeria team handles pickup and last-mile delivery.',
         'values_eyebrow' => 'What we stand for',
         'values_title'   => 'What we stand for',
         'values' => [
@@ -87,7 +87,7 @@ return [
         'title'        => 'Privacy policy',
         'last_updated' => 'Last updated: :date',
         'sections' => [
-            ['title' => 'Who we are', 'body' => 'Korea Auto Export ("we", "us", "our") imports Korean-spec used vehicles to Algerian customers. We are reachable at the contact details listed on our Contact page.'],
+            ['title' => 'Who we are', 'body' => 'ADY Motors ("we", "us", "our") imports Korean-spec used vehicles to Algerian customers. We are reachable at the contact details listed on our Contact page.'],
             ['title' => 'What data we collect', 'body' => "When you submit an inquiry, quote, reservation, or contact form we collect:\n• Name, phone number, optional WhatsApp number, optional email\n• City and the vehicle you're interested in\n• Your message\n• Technical: IP address (hashed), user-agent string, the page you came from, and any UTM parameters in the URL\nWe never collect: passport numbers, ID card numbers, payment card details, or bank account information through this website."],
             ['title' => 'Why we collect it', 'body' => "Solely to reply to your inquiry, provide quotations and updates on a vehicle, and improve the website. We do not sell, rent, or share your personal data with third parties for advertising. We may share data only with our shipping/customs partners and only to the extent necessary to fulfil your order."],
             ['title' => 'Cookies and analytics', 'body' => "We use a small number of cookies:\n• A session cookie (kae_session) to keep you logged in if you're an admin\n• A locale cookie (locale) to remember your language choice\n• Optional analytics cookies, only if you accept them from the consent banner. We use Plausible or Google Analytics 4 in a privacy-friendly configuration with IP anonymization. You can change your choice at any time via the 'Cookie settings' link in the footer."],
@@ -104,13 +104,13 @@ return [
         'last_updated' => 'Last updated: :date',
         'sections' => [
             ['title' => 'About these terms', 'body' => "By using this website you agree to these terms. If you don't agree, please don't use the site."],
-            ['title' => 'Our role', 'body' => "Korea Auto Export is an import broker. We source Korean used vehicles, arrange inspection, payment, shipping, and customs clearance on your behalf. We are not the manufacturer or original seller of the vehicle."],
+            ['title' => 'Our role', 'body' => "ADY Motors is an import broker. We source Korean used vehicles, arrange inspection, payment, shipping, and customs clearance on your behalf. We are not the manufacturer or original seller of the vehicle."],
             ['title' => 'Vehicle listings', 'body' => "Listings reflect the vehicle's condition at the time of inspection in Korea. Prices shown are in USD (FOB Busan) unless otherwise stated. The DZD conversion is indicative — the FX rate at payment may differ. All-in estimates include customs and service fees but final customs duties are calculated by Algerian authorities and may vary."],
             ['title' => 'Inspection reports', 'body' => "Inspection scores are produced by our in-person team and represent their professional opinion. They do not constitute a mechanical warranty. We commit to disclosing any defect we are aware of."],
             ['title' => 'Reservations', 'body' => "A reservation holds a specific vehicle pending the customer's commitment. A deposit may be required to confirm the reservation. Deposits are refundable as defined in your reservation agreement."],
             ['title' => 'Payment', 'body' => "We accept bank transfer with an official receipt. We do not accept cash. The final purchase agreement will be signed separately and supersedes any preliminary quote."],
             ['title' => 'Shipping and customs', 'body' => "Estimated delivery is 5 to 7 weeks from confirmation. We are not liable for force-majeure events that delay shipping (port closures, weather, geopolitical events). Customs assistance is provided in good faith but final clearance decisions belong to the Algerian customs authority."],
-            ['title' => 'Limitation of liability', 'body' => "To the extent allowed by Algerian law, our liability is limited to the value of the service fee paid to Korea Auto Export. We are not liable for indirect or consequential losses."],
+            ['title' => 'Limitation of liability', 'body' => "To the extent allowed by Algerian law, our liability is limited to the value of the service fee paid to ADY Motors. We are not liable for indirect or consequential losses."],
             ['title' => 'Governing law', 'body' => "These terms are governed by the laws of Algeria. Any dispute will be heard by the courts of Algiers."],
             ['title' => 'Contact', 'body' => "Questions about these terms? Reach us via the Contact page."],
         ],

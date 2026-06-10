@@ -1,13 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 130" role="img" aria-label="Korea Auto Export">
+<!-- ADY Motors — vertical stacked logo (icon on top, wordmark beneath) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 132" role="img" aria-label="ADY Motors">
+    <!-- Mark, centered horizontally -->
     <g transform="translate(48,0)">
-        <rect width="64" height="64" rx="14" fill="#0A1A2F"/>
+        <rect width="64" height="64" rx="14" fill="#0A0A0A"/>
         <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="rgba(255,255,255,0.06)"/>
-        <rect x="17" y="14" width="5" height="36" rx="1.5" fill="#ffffff"/>
-        <path d="M22 32 L40 14 L46 14 L26 34 Z" fill="#ffffff"/>
-        <path d="M22 32 L40 50 L46 50 L26 30 Z" fill="#CD2E3A"/>
+        <path d="M14 50 L26 14 L29 14 L41 50 L36 50 L33 41 L22 41 L19 50 Z" fill="#FFFFFF"/>
+        <rect x="22.5" y="35" width="10" height="3" fill="#FFFFFF"/>
+        <line x1="44" y1="26" x2="54" y2="26" stroke="#0057FF" stroke-width="3" stroke-linecap="square"/>
+        <line x1="44" y1="36" x2="56" y2="36" stroke="#0057FF" stroke-width="3" stroke-linecap="square"/>
     </g>
-    <g font-family="Inter, system-ui, sans-serif" text-anchor="middle" fill="#0A1A2F">
-        <text x="80" y="92" font-size="18" font-weight="800" letter-spacing="0.04em">KOREA AUTO</text>
-        <text x="80" y="112" font-size="11" font-weight="500" letter-spacing="0.36em" fill="#5B6877">EXPORT</text>
+    <!-- Wordmark -->
+    <g font-family="Inter, system-ui, sans-serif" text-anchor="middle" fill="#0A0A0A">
+        <text x="80" y="94" font-size="22" font-weight="800" letter-spacing="-0.02em">ADY</text>
+        <text x="80" y="116" font-size="10" font-weight="600" letter-spacing="0.40em" fill="#5A5A5A">MOTORS</text>
     </g>
 </svg>

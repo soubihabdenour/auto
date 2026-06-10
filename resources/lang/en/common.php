@@ -2,7 +2,8 @@
 
 return [
     'brand' => [
-        'name'     => 'Korea Auto Export',
+        'name'     => 'ADY Motors',
+        'tagline'  => 'Korean cars, delivered.',
         'eyebrow'  => 'Korean cars, imported to Algeria',
     ],
     'nav' => [
@@ -33,10 +34,11 @@ return [
         'new'      => 'New',
     ],
     'footer' => [
-        'tagline'         => 'Verified Korean cars, transparent pricing.',
+        'tagline'         => 'Korean cars, delivered to Algeria with confidence.',
         'scaffold_notice' => 'Built with care in Algeria and Korea.',
         'quick_links'     => 'Quick links',
         'company'         => 'Company',
+        'contact'         => 'Contact',
         'languages'       => 'Languages',
         'follow_us'       => 'Follow us',
         'privacy'         => 'Privacy',

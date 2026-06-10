@@ -2,10 +2,17 @@
 
 return [
     'hero' => [
-        'eyebrow'     => 'Korean cars · Direct import to Algeria',
+        'eyebrow'     => 'ADY Motors · Korea → Algeria',
         'short_title' => 'Home',
-        'headline'    => 'Import premium Korean cars, delivered to Algeria.',
-        'subheadline' => 'Verified vehicles, transparent inspection reports, competitive prices.',
+        'headline'    => 'Premium Korean Vehicles. Delivered Worldwide.',
+        'subheadline' => 'Source, purchase, and import trusted Korean vehicles through ADY Motors.',
+        'cta_browse'  => 'Browse Inventory',
+        'cta_quote'   => 'Request Quote',
+        'cta_whatsapp'=> 'WhatsApp Consultation',
+        'scroll_cue'  => 'Scroll',
+        'trust_inspected' => 'Every vehicle inspected',
+        'trust_korea'     => 'Sourced in Korea',
+        'trust_quote'     => 'Transparent pricing',
     ],
     'quick_search' => [
         'title'    => 'Quick search',

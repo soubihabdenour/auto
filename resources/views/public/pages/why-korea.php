@@ -6,21 +6,21 @@ $comparison = (array) t_arr('pages.why_korea.comparison.rows');
 ?>
 <?php $this->section('content'); ?>
 
-<!-- Hero -->
-<section class="kae-section kae-section--soft text-center">
-    <div class="container">
-        <span class="kae-eyebrow"><?= e(t('pages.why_korea.eyebrow') ?: 'Why Korea') ?></span>
-        <h1 class="kae-section-title"><?= e(t('pages.why_korea.title')) ?></h1>
-        <p class="kae-section-subtitle mx-auto"><?= e(t('pages.why_korea.subtitle')) ?></p>
-    </div>
-</section>
+<?= $this->partial('partials/page-hero', [
+    'eyebrow'  => t('pages.why_korea.eyebrow') ?: 'Why Korea',
+    'title'    => t('pages.why_korea.title'),
+    'subtitle' => t('pages.why_korea.subtitle'),
+    'crumbs'   => [
+        ['label' => t('vehicle.detail.breadcrumb.home'), 'url' => locale_url('/')],
+        ['label' => t('pages.why_korea.title'),          'url' => null],
+    ],
+]) ?>
 
-<!-- 4-reason feature grid -->
 <section class="kae-section">
     <div class="container">
         <div class="kae-feature-grid">
-            <?php foreach ($reasons as $r): ?>
-                <div class="kae-feature">
+            <?php foreach ($reasons as $i => $r): ?>
+                <div class="kae-feature" data-reveal data-reveal-delay="<?= ($i * 100) ?>">
                     <div class="kae-feature-icon"><?= e((string) ($r['icon'] ?? '')) ?></div>
                     <h3 class="kae-feature-title"><?= e((string) ($r['title'] ?? '')) ?></h3>
                     <p class="kae-feature-body"><?= e((string) ($r['body'] ?? '')) ?></p>

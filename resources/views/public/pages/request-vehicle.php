@@ -9,26 +9,31 @@
 $this->extends('layouts/public');
 ?>
 <?php $this->section('content'); ?>
-<section class="kae-section kae-section--soft text-center">
+
+<?= $this->partial('partials/page-hero', [
+    'eyebrow'  => t('pages.request_vehicle.eyebrow') ?: 'Tell us what you want',
+    'title'    => t('pages.request_vehicle.title'),
+    'subtitle' => t('pages.request_vehicle.subtitle'),
+    'crumbs'   => [
+        ['label' => t('vehicle.detail.breadcrumb.home'), 'url' => locale_url('/')],
+        ['label' => t('pages.request_vehicle.title'),    'url' => null],
+    ],
+]) ?>
+
+<section class="kae-section">
     <div class="container">
-        <span class="kae-eyebrow"><?= e(t('pages.request_vehicle.eyebrow') ?: 'Tell us what you want') ?></span>
-        <h1 class="kae-section-title"><?= e(t('pages.request_vehicle.title')) ?></h1>
-        <p class="kae-section-subtitle mx-auto"><?= e(t('pages.request_vehicle.subtitle')) ?></p>
-    </div>
-</section>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8" data-reveal>
+                <div class="kae-contact-card">
 
-<section class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-8">
+                    <?php if (! empty($success)): ?>
+                        <div class="alert alert-success"><?= e((string) $success) ?></div>
+                    <?php endif; ?>
+                    <?php if (! empty($errors['_global'][0])): ?>
+                        <div class="alert alert-danger"><?= e((string) $errors['_global'][0]) ?></div>
+                    <?php endif; ?>
 
-            <?php if (! empty($success)): ?>
-                <div class="alert alert-success"><?= e((string) $success) ?></div>
-            <?php endif; ?>
-            <?php if (! empty($errors['_global'][0])): ?>
-                <div class="alert alert-danger"><?= e((string) $errors['_global'][0]) ?></div>
-            <?php endif; ?>
-
-            <form method="POST" action="<?= e(locale_url('/request-vehicle')) ?>" novalidate>
+                    <form method="POST" action="<?= e(locale_url('/request-vehicle')) ?>" novalidate>
                 <?= csrf_field() ?>
                 <input type="text" name="_website" tabindex="-1" autocomplete="off"
                        style="position:absolute;left:-9999px;" aria-hidden="true">
@@ -124,7 +129,9 @@ $this->extends('layouts/public');
                         </button>
                     </div>
                 </div>
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </section>

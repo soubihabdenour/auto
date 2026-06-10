@@ -65,7 +65,7 @@ try {
     <meta name="twitter:description" content="<?= e((string) $metaDesc) ?>">
     <meta name="twitter:image" content="<?= e($ogImage) ?>">
 
-    <!-- Self-hosted fonts -->
+    <!-- Self-hosted fonts (Inter latin + IBM Plex Sans Arabic for RTL) -->
     <link rel="preload" as="font" type="font/woff2" crossorigin
           href="<?= asset('fonts/inter/Inter-Latin.woff2') ?>">
     <?php if ($isArabic): ?>
@@ -75,6 +75,12 @@ try {
               href="<?= asset('fonts/ibm-plex-sans-arabic/IBMPlexSansArabic-Bold.woff2') ?>">
     <?php endif; ?>
     <link rel="stylesheet" href="<?= asset('css/fonts.css') ?>">
+
+    <!-- Manrope display font (Google Fonts) — used for display + headings. Falls back to Inter. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap">
 
     <?php if ($dir === 'rtl'): ?>
         <link rel="stylesheet"
@@ -89,6 +95,8 @@ try {
     <?php endif; ?>
 
     <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/kae-design.css') ?>">
+    <script src="<?= asset('js/kae-motion.js') ?>" defer></script>
 
     <!-- Site-wide Organization schema -->
     <?php if ($orgSchema !== null): ?>

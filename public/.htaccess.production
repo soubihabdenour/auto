@@ -1,5 +1,5 @@
 # =============================================================
-# Korea Auto Export — production .htaccess
+# ADY Motors — production .htaccess
 #
 # Copy this file over .htaccess on the production server:
 #   cp public/.htaccess.production public/.htaccess

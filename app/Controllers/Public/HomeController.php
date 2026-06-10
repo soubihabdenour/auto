@@ -12,6 +12,7 @@ use App\Repositories\ModelRepository;
 use App\Repositories\TestimonialRepository;
 use App\Repositories\VehicleRepository;
 use App\Services\I18n\LocaleResolver;
+use App\Services\Lead\WhatsAppLinkBuilder;
 use App\Services\Setting\SettingService;
 
 final class HomeController
@@ -24,6 +25,7 @@ final class HomeController
         private ModelRepository       $models,
         private TestimonialRepository $testimonials,
         private SettingService        $settings,
+        private WhatsAppLinkBuilder   $whatsapp,
     ) {}
 
     public function redirectToDefaultLocale(Request $request): Response
@@ -50,12 +52,15 @@ final class HomeController
             t('home.hero.subheadline')
         ), t('home.hero.subheadline'));
 
+        $wa_link = $this->safe(fn () => $this->whatsapp->generic($locale), '#');
+
         $html = $this->view->render('public/home', [
             'page_title'   => t('common.brand.name') . ' — ' . t('home.hero.short_title'),
             'featured'     => $featured,
             'testimonials' => $testimonials,
             'brands'       => $brands,
             'tagline'      => $tagline,
+            'wa_link'      => $wa_link,
         ]);
         return Response::html($html);
     }

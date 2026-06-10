@@ -1,5 +1,5 @@
 -- =============================================================
---  Korea Auto Export — MySQL 8.0 Schema (v1)
+--  ADY Motors — MySQL 8.0 Schema (v1)
 --  Charset: utf8mb4   Collation: utf8mb4_unicode_ci   Engine: InnoDB
 -- =============================================================
 

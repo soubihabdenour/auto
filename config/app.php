@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name'             => env('APP_NAME', 'Korea Auto Export'),
+    'name'             => env('APP_NAME', 'ADY Motors'),
     'env'              => env('APP_ENV', 'production'),
     'debug'            => filter_var(env('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN),
     'url'              => rtrim((string) env('APP_URL', 'http://localhost'), '/'),

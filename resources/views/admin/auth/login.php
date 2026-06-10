@@ -11,7 +11,7 @@ $this->extends('layouts/admin');
 <div class="kae-admin-login">
     <div class="kae-admin-login-card">
         <div class="text-center mb-4">
-            <img src="<?= asset('img/logo.svg') ?>" alt="Korea Auto Export" width="220" height="50">
+            <img src="<?= asset('img/logo.svg') ?>" alt="ADY Motors" width="220" height="50">
             <p class="text-muted small mt-3 mb-0">Admin sign-in</p>
         </div>
 

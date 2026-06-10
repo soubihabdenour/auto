@@ -5,36 +5,33 @@ $values = t_arr('pages.about.values');
 ?>
 <?php $this->section('content'); ?>
 
-<!-- Hero -->
-<section class="kae-section kae-section--soft text-center">
-    <div class="container">
-        <span class="kae-eyebrow"><?= e(t('pages.about.eyebrow') ?: 'About us') ?></span>
-        <h1 class="kae-section-title"><?= e(t('pages.about.title')) ?></h1>
-        <p class="kae-section-subtitle mx-auto"><?= e(t('pages.about.subtitle')) ?></p>
-    </div>
-</section>
+<?= $this->partial('partials/page-hero', [
+    'eyebrow'  => t('pages.about.eyebrow') ?: 'About us',
+    'title'    => t('pages.about.title'),
+    'subtitle' => t('pages.about.subtitle'),
+    'crumbs'   => [
+        ['label' => t('vehicle.detail.breadcrumb.home'), 'url' => locale_url('/')],
+        ['label' => t('pages.about.title'),              'url' => null],
+    ],
+]) ?>
 
-<!-- Body -->
 <section class="kae-section">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 lead text-muted">
-                <p><?= e(t('pages.about.body')) ?></p>
-            </div>
+        <div class="kae-prose" data-reveal>
+            <p class="lead"><?= e(t('pages.about.body')) ?></p>
         </div>
     </div>
 </section>
 
-<!-- Values feature grid -->
 <section class="kae-section kae-section--soft">
     <div class="container">
-        <div class="text-center mb-5">
+        <div class="text-center mb-5" data-reveal>
             <span class="kae-eyebrow"><?= e(t('pages.about.values_eyebrow') ?: 'What we stand for') ?></span>
             <h2 class="kae-section-title"><?= e(t('pages.about.values_title')) ?></h2>
         </div>
         <div class="kae-feature-grid">
-            <?php foreach ($values as $v): ?>
-                <div class="kae-feature">
+            <?php foreach ($values as $i => $v): ?>
+                <div class="kae-feature" data-reveal data-reveal-delay="<?= ($i * 100) ?>">
                     <h3 class="kae-feature-title"><?= e((string) ($v['title'] ?? '')) ?></h3>
                     <p class="kae-feature-body"><?= e((string) ($v['body'] ?? '')) ?></p>
                 </div>

@@ -2,7 +2,8 @@
 
 return [
     'brand' => [
-        'name'     => 'Korea Auto Export',
+        'name'     => 'ADY Motors',
+        'tagline'  => 'Voitures coréennes, livrées.',
         'eyebrow'  => 'Importez votre voiture coréenne en Algérie',
     ],
     'nav' => [
@@ -33,10 +34,11 @@ return [
         'new'      => 'Nouveau',
     ],
     'footer' => [
-        'tagline'         => 'Véhicules coréens vérifiés, prix transparents.',
+        'tagline'         => 'Voitures coréennes, livrées en Algérie en toute confiance.',
         'scaffold_notice' => 'Conçu avec soin en Algérie et en Corée.',
         'quick_links'     => 'Liens rapides',
         'company'         => 'L\'entreprise',
+        'contact'         => 'Contact',
         'languages'       => 'Langues',
         'follow_us'       => 'Suivez-nous',
         'privacy'         => 'Confidentialité',

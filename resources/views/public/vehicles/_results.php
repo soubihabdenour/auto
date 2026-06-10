@@ -8,16 +8,20 @@
  */
 ?>
 <?php if (empty($results)): ?>
-    <div class="kae-empty text-center py-5">
-        <p class="text-muted mb-3"><?= e(t('vehicle.list.no_results')) ?></p>
+    <div class="kae-list-empty">
+        <div class="kae-list-empty-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <h3 class="kae-list-empty-title"><?= e(t('vehicle.list.no_results')) ?></h3>
         <a href="<?= e(locale_url('/vehicles')) ?>" class="btn btn-outline-dark">
             <?= e(t('vehicle.list.reset')) ?>
         </a>
     </div>
 <?php else: ?>
     <div class="row g-3 g-md-4">
-        <?php foreach ($results as $vehicle): ?>
-            <div class="col-12 col-sm-6 col-xl-4">
+        <?php foreach ($results as $i => $vehicle): ?>
+            <div class="col-12 col-sm-6 col-xl-4"
+                 data-reveal data-reveal-delay="<?= (($i % 6) * 60) ?>">
                 <?= $this->partial('partials/vehicle-card', ['vehicle' => $vehicle]) ?>
             </div>
         <?php endforeach; ?>

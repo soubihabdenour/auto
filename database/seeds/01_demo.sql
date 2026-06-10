@@ -1,5 +1,5 @@
 -- =============================================================
---  Korea Auto Export — Demo seed (5 vehicles + testimonials + pages)
+--  ADY Motors — Demo seed (5 vehicles + testimonials + pages)
 --  Run AFTER 00_reference.sql. Idempotency: deletes prior demo rows
 --  by VIN prefix "KAE-DEMO-" before re-inserting.
 -- =============================================================

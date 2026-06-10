@@ -53,7 +53,7 @@ return [
         'eyebrow'        => 'À propos',
         'title'    => 'À propos',
         'subtitle' => 'Une équipe qui combine expérience algérienne et connaissance locale coréenne.',
-        'body'     => 'Korea Auto Export a été créée pour apporter la qualité coréenne au marché algérien, avec confiance et transparence. Notre équipe à Busan inspecte chaque voiture en personne, et notre équipe en Algérie gère la réception et la livraison.',
+        'body'     => 'ADY Motors a été créée pour apporter la qualité coréenne au marché algérien, avec confiance et transparence. Notre équipe à Busan inspecte chaque voiture en personne, et notre équipe en Algérie gère la réception et la livraison.',
         'values_eyebrow' => 'Nos valeurs',
         'values_title'   => 'Nos valeurs',
         'values' => [
@@ -87,7 +87,7 @@ return [
         'title'        => 'Politique de confidentialité',
         'last_updated' => 'Dernière mise à jour : :date',
         'sections' => [
-            ['title' => 'Qui sommes-nous',          'body' => 'Korea Auto Export importe des véhicules d\'occasion coréens pour ses clients algériens. Vous pouvez nous joindre via les coordonnées de la page Contact.'],
+            ['title' => 'Qui sommes-nous',          'body' => 'ADY Motors importe des véhicules d\'occasion coréens pour ses clients algériens. Vous pouvez nous joindre via les coordonnées de la page Contact.'],
             ['title' => 'Données collectées',       'body' => "Lorsque vous soumettez une demande, devis, réservation ou message :\n• Nom, téléphone, WhatsApp optionnel, email optionnel\n• Ville et véhicule demandé\n• Votre message\n• Données techniques : adresse IP (hachée), user-agent, page de provenance, paramètres UTM.\nNous ne collectons jamais : numéro de passeport, carte d'identité, carte bancaire, ou compte bancaire via ce site."],
             ['title' => 'Finalité de la collecte',  'body' => 'Uniquement pour répondre à votre demande, fournir devis et mises à jour, et améliorer le site. Nous ne vendons ni ne louons vos données à des tiers à des fins publicitaires.'],
             ['title' => 'Cookies et analytics',     'body' => "Nous utilisons un petit nombre de cookies :\n• Un cookie de session (kae_session) pour la connexion admin\n• Un cookie de langue (locale) pour mémoriser votre choix\n• Cookies d'analytics optionnels, uniquement si vous les acceptez via la bannière. Plausible ou Google Analytics 4 en configuration respectueuse de la vie privée."],
@@ -104,13 +104,13 @@ return [
         'last_updated' => 'Dernière mise à jour : :date',
         'sections' => [
             ['title' => 'À propos des conditions', 'body' => "En utilisant ce site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, merci de ne pas utiliser le site."],
-            ['title' => 'Notre rôle',              'body' => 'Korea Auto Export est un courtier d\'importation. Nous sourçons des véhicules d\'occasion coréens, organisons l\'inspection, le paiement, l\'expédition et le dédouanement pour votre compte. Nous ne sommes ni le constructeur ni le vendeur originel.'],
+            ['title' => 'Notre rôle',              'body' => 'ADY Motors est un courtier d\'importation. Nous sourçons des véhicules d\'occasion coréens, organisons l\'inspection, le paiement, l\'expédition et le dédouanement pour votre compte. Nous ne sommes ni le constructeur ni le vendeur originel.'],
             ['title' => 'Annonces',                'body' => 'Les annonces reflètent l\'état du véhicule au moment de l\'inspection en Corée. Les prix sont en USD (FOB Busan). La conversion DZD est indicative — le taux au paiement peut différer.'],
             ['title' => 'Rapports d\'inspection',  'body' => 'Les scores reflètent l\'opinion professionnelle de notre équipe en personne. Ils ne constituent pas une garantie mécanique.'],
             ['title' => 'Réservations',            'body' => 'Une réservation immobilise un véhicule pendant la décision du client. Un acompte peut être demandé. Conditions de remboursement définies dans l\'accord de réservation.'],
             ['title' => 'Paiement',                'body' => 'Virement bancaire avec reçu officiel. Pas de paiement en espèces.'],
             ['title' => 'Expédition et douane',    'body' => 'Livraison estimée 5 à 7 semaines après confirmation. Nous ne sommes pas responsables des cas de force majeure (fermetures de port, météo, événements géopolitiques).'],
-            ['title' => 'Limitation de responsabilité', 'body' => 'Dans la limite autorisée par la loi algérienne, notre responsabilité est limitée au montant des frais de service payés à Korea Auto Export.'],
+            ['title' => 'Limitation de responsabilité', 'body' => 'Dans la limite autorisée par la loi algérienne, notre responsabilité est limitée au montant des frais de service payés à ADY Motors.'],
             ['title' => 'Droit applicable',        'body' => 'Ces conditions sont régies par le droit algérien. Tout litige relève des tribunaux d\'Alger.'],
             ['title' => 'Contact',                 'body' => 'Des questions ? Contactez-nous via la page Contact.'],
         ],

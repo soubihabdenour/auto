@@ -2,10 +2,17 @@
 
 return [
     'hero' => [
-        'eyebrow'     => 'Voitures coréennes · Importation directe en Algérie',
+        'eyebrow'     => 'ADY Motors · Corée → Algérie',
         'short_title' => 'Accueil',
-        'headline'    => 'Importez des voitures coréennes premium, livrées en Algérie.',
-        'subheadline' => 'Véhicules vérifiés, rapports d\'inspection transparents, prix compétitifs.',
+        'headline'    => 'Véhicules coréens premium. Livrés partout dans le monde.',
+        'subheadline' => 'Sourcez, achetez et importez des véhicules coréens de confiance avec ADY Motors.',
+        'cta_browse'  => 'Voir le catalogue',
+        'cta_quote'   => 'Demander un devis',
+        'cta_whatsapp'=> 'Consultation WhatsApp',
+        'scroll_cue'  => 'Défilez',
+        'trust_inspected' => 'Chaque véhicule inspecté',
+        'trust_korea'     => 'Sourcé en Corée',
+        'trust_quote'     => 'Prix transparents',
     ],
     'quick_search' => [
         'title'    => 'Recherche rapide',

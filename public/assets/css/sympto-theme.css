@@ -1,0 +1,575 @@
+/* =================================================================
+   ADY Motors — sympto-inspired theme overlay
+   Loaded AFTER app.css + admin.css so it wins the cascade.
+
+   Source design language: /Users/ady/PycharmProjects/sympto
+   - brand: bright clean blue scale (#1c72f0 mid)
+   - ink:   slate-blue greys (#222836 ink-900 → #f6f7f9 ink-50)
+   - subtle shadows, larger card radii (rounded-xl ≈ 12px)
+   - uppercase tracked labels, system-font stack
+   - card-first layout pattern
+   ================================================================= */
+
+/* ---------- 1. Sympto tokens (additive — old token names still work) */
+:root {
+    /* Brand blue scale */
+    --kae-brand-50:  #eff8ff;
+    --kae-brand-100: #daedff;
+    --kae-brand-200: #bce0ff;
+    --kae-brand-300: #8ecdff;
+    --kae-brand-400: #59b0ff;
+    --kae-brand-500: #3290fb;
+    --kae-brand-600: #1c72f0;
+    --kae-brand-700: #155cdb;
+    --kae-brand-800: #184bb1;
+    --kae-brand-900: #1a428c;
+
+    /* Ink (text + UI greys) */
+    --kae-ink-50:  #f6f7f9;
+    --kae-ink-100: #eceef2;
+    --kae-ink-200: #d5dae3;
+    --kae-ink-300: #b1bbcb;
+    --kae-ink-400: #8593aa;
+    --kae-ink-500: #65748f;
+    --kae-ink-600: #505d75;
+    --kae-ink-700: #414b5f;
+    --kae-ink-800: #384051;
+    --kae-ink-900: #222836;
+
+    --kae-card-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 1px 3px rgba(15,23,42,0.06);
+    --kae-card-shadow-hover: 0 4px 12px rgba(15,23,42,0.08), 0 2px 4px rgba(15,23,42,0.05);
+
+    /* ----- Remap existing project tokens to sympto values ----- */
+    --c-navy:           var(--kae-brand-800);   /* primary action / heading */
+    --c-navy-700:       var(--kae-brand-700);
+    --c-navy-900:       var(--kae-ink-900);
+    --c-red:            #dc2626;                /* tone down + de-emphasize */
+    --c-red-700:        #b91c1c;
+    --c-red-50:         #fef2f2;
+
+    --c-bg:             var(--kae-ink-50);
+    --c-bg-soft:        #ffffff;
+    --c-bg-tinted:      var(--kae-ink-100);
+    --c-border:         var(--kae-ink-100);
+    --c-border-strong:  var(--kae-ink-200);
+
+    --c-text:           var(--kae-ink-900);
+    --c-text-muted:     var(--kae-ink-500);
+    --c-text-subtle:    var(--kae-ink-400);
+
+    --shadow-1: var(--kae-card-shadow);
+    --shadow-2: var(--kae-card-shadow-hover);
+    --shadow-3: 0 12px 28px rgba(15,23,42,0.12);
+    --shadow-card-hover: var(--kae-card-shadow-hover);
+
+    /* Sympto leans on system fonts — drop Inter for slightly tighter system look */
+    --ff-latin: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    /* Slightly bigger card radii (rounded-xl), buttons stay subtle */
+    --r-sm: 6px;
+    --r-md: 12px;
+    --r-lg: 16px;
+
+    /* ----- Bootstrap variable overrides — flow through every .btn, .form-control, etc. ----- */
+    --bs-primary:        var(--kae-brand-600);
+    --bs-primary-rgb:    28, 114, 240;
+    --bs-link-color:     var(--kae-brand-700);
+    --bs-link-hover-color: var(--kae-brand-800);
+    --bs-body-bg:        var(--kae-ink-50);
+    --bs-body-color:     var(--kae-ink-900);
+    --bs-border-color:   var(--kae-ink-100);
+    --bs-secondary-color: var(--kae-ink-500);
+    --bs-tertiary-color:  var(--kae-ink-400);
+    --bs-tertiary-bg:    var(--kae-ink-100);
+    --bs-border-radius:  6px;
+    --bs-border-radius-sm: 4px;
+    --bs-border-radius-lg: 12px;
+    --bs-card-bg:        #ffffff;
+    --bs-card-border-color: var(--kae-ink-100);
+}
+
+/* ---------- 2. Surfaces ---------- */
+body {
+    background: var(--kae-ink-50);
+    color: var(--kae-ink-900);
+}
+
+a { color: var(--kae-brand-700); }
+a:hover { color: var(--kae-brand-800); }
+
+/* Bootstrap container backgrounds */
+.bg-white { background-color: #ffffff !important; }
+.bg-light { background-color: var(--kae-ink-50) !important; }
+
+/* ---------- 3. Cards (sympto-style: rounded-xl, border ink-100, subtle shadow) ---------- */
+.card,
+.kae-card,
+.kae-detail-sidebar-v2 {
+    background: #ffffff;
+    border: 1px solid var(--kae-ink-100);
+    border-radius: 12px;
+    box-shadow: var(--kae-card-shadow);
+    transition: box-shadow 180ms ease, border-color 180ms ease;
+}
+.card:hover,
+.kae-card.is-interactive:hover { box-shadow: var(--kae-card-shadow-hover); }
+
+.kae-card-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--kae-ink-100);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--kae-ink-500);
+}
+.kae-card-body { padding: 18px; }
+
+/* ---------- 4. Buttons (sympto: rounded-md, tight padding, brand-600) ---------- */
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.875rem;
+    letter-spacing: 0;
+    transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
+}
+.btn-lg { font-size: 0.9375rem; padding: 0.625rem 1.25rem; }
+.btn-sm { padding: 0.375rem 0.625rem; font-size: 0.8125rem; }
+
+.btn-primary {
+    background: var(--kae-brand-600);
+    border-color: var(--kae-brand-600);
+    color: #fff;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background: var(--kae-brand-700) !important;
+    border-color: var(--kae-brand-700) !important;
+    color: #fff;
+}
+.btn-primary:focus-visible {
+    box-shadow: 0 0 0 3px var(--kae-brand-100);
+}
+
+.btn-outline-dark {
+    color: var(--kae-ink-800);
+    border-color: var(--kae-ink-200);
+    background: #ffffff;
+}
+.btn-outline-dark:hover, .btn-outline-dark:focus {
+    background: var(--kae-ink-50);
+    color: var(--kae-ink-900);
+    border-color: var(--kae-ink-300);
+}
+
+.btn-outline-primary {
+    color: var(--kae-brand-700);
+    border-color: var(--kae-brand-300);
+    background: transparent;
+}
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-800);
+    border-color: var(--kae-brand-500);
+}
+
+.btn-link {
+    color: var(--kae-brand-700);
+    text-decoration: none;
+}
+.btn-link:hover { color: var(--kae-brand-800); text-decoration: underline; }
+
+.btn-success {
+    background: #25D366;          /* keep the WhatsApp green */
+    border-color: #25D366;
+    color: #fff;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+    background: #1fb455 !important;
+    border-color: #1fb455 !important;
+    color: #fff;
+}
+
+/* ---------- 5. Form controls + labels (sympto: small uppercase labels, focus ring brand-100) ---------- */
+.form-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--kae-ink-500);
+    margin-bottom: 4px;
+}
+.form-control,
+.form-select {
+    border-radius: 6px;
+    border-color: var(--kae-ink-200);
+    background: #ffffff;
+    color: var(--kae-ink-900);
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--kae-brand-500);
+    box-shadow: 0 0 0 3px var(--kae-brand-100);
+}
+.form-control-lg { font-size: 0.9375rem; padding: 0.625rem 0.875rem; }
+.form-control-sm { font-size: 0.8125rem; padding: 0.375rem 0.5rem; }
+
+.form-control::placeholder { color: var(--kae-ink-400); }
+.form-control.is-invalid,
+.form-select.is-invalid { border-color: #dc2626; }
+.form-control.is-invalid:focus { box-shadow: 0 0 0 3px #fee2e2; }
+
+.input-group-text {
+    background: var(--kae-ink-50);
+    border-color: var(--kae-ink-200);
+    color: var(--kae-ink-600);
+    font-size: 0.875rem;
+}
+
+.form-check-input { border-color: var(--kae-ink-300); }
+.form-check-input:checked {
+    background-color: var(--kae-brand-600);
+    border-color: var(--kae-brand-600);
+}
+.form-check-input:focus { box-shadow: 0 0 0 3px var(--kae-brand-100); }
+
+/* ---------- 6. Tables ---------- */
+.kae-table,
+.table {
+    --bs-table-bg: transparent;
+    color: var(--kae-ink-800);
+}
+.kae-table thead th,
+.table thead th {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--kae-ink-500);
+    background: var(--kae-ink-50);
+    border-bottom: 1px solid var(--kae-ink-100);
+    padding: 10px 14px;
+}
+.kae-table tbody td,
+.table tbody td {
+    border-bottom: 1px solid var(--kae-ink-100);
+    padding: 12px 14px;
+    font-size: 0.875rem;
+}
+.kae-table tbody tr:hover { background: var(--kae-ink-50); }
+
+/* ---------- 7. Status / pill / badges ---------- */
+.kae-status,
+.badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 9999px;
+    padding: 2px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+.kae-status-available,
+.kae-status-confirmed,
+.kae-status-won {
+    background: #d1fae5; color: #065f46;
+}
+.kae-status-pending_reservation,
+.kae-status-pending_deposit,
+.kae-status-reserved,
+.kae-status-new {
+    background: var(--kae-brand-50); color: var(--kae-brand-700);
+}
+.kae-status-sold,
+.kae-status-converted,
+.kae-status-archived {
+    background: var(--kae-ink-100); color: var(--kae-ink-700);
+}
+.kae-status-draft { background: #fef3c7; color: #92400e; }
+.kae-status-expired,
+.kae-status-cancelled,
+.kae-status-lost { background: #fee2e2; color: #991b1b; }
+
+.kae-card-badge {
+    background: rgba(28,114,240,0.92);
+    color: #fff;
+    border-radius: 9999px;
+    padding: 3px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.kae-card-badge-warning { background: rgba(251,191,36,0.95); color: #422006; }
+.kae-card-badge-muted   { background: rgba(34,40,54,0.85); color: #fff; }
+
+/* ---------- 8. Public header / nav ---------- */
+.kae-header { background: #ffffff; border-bottom: 1px solid var(--kae-ink-100); }
+.kae-header .nav-link {
+    color: var(--kae-ink-700);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+.kae-header .nav-link:hover { color: var(--kae-brand-700); }
+.kae-header .nav-link::after { background: var(--kae-brand-600); }
+
+/* ---------- 9. Footer ---------- */
+.kae-footer { background: var(--kae-ink-900); color: var(--kae-ink-200); }
+.kae-footer a { color: var(--kae-ink-300); }
+.kae-footer a:hover { color: #fff; }
+.kae-footer-brand { color: #fff; }
+
+/* ---------- 10. Admin sidebar ---------- */
+.kae-admin-sidebar {
+    background: #ffffff;
+    border-right: 1px solid var(--kae-ink-100);
+    box-shadow: none;
+}
+.kae-admin-brand { padding: 20px 20px 16px; border-bottom: 1px solid var(--kae-ink-100); }
+.kae-admin-nav { padding: 8px 8px; }
+.kae-admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--kae-ink-700);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+.kae-admin-nav-link:hover { background: var(--kae-ink-50); color: var(--kae-ink-900); }
+.kae-admin-nav-link.is-active {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-700);
+    font-weight: 600;
+}
+.kae-admin-nav-icon { width: 18px; text-align: center; opacity: 0.85; }
+.kae-admin-sidebar-footer { padding: 12px 16px; border-top: 1px solid var(--kae-ink-100); }
+.kae-admin-link-out {
+    color: var(--kae-ink-500);
+    text-decoration: none;
+    font-size: 0.8125rem;
+}
+.kae-admin-link-out:hover { color: var(--kae-brand-700); }
+
+/* ---------- 11. Page head ---------- */
+.kae-page-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 0 16px;
+}
+.kae-page-head h1 {
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--kae-ink-900);
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+}
+.kae-page-head .text-muted { color: var(--kae-ink-500) !important; }
+
+/* ---------- 12. Hero (homepage) ---------- */
+.kae-home-hero {
+    background:
+        radial-gradient(120% 100% at 50% 0%, rgba(28,114,240,0.08) 0%, transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, var(--kae-ink-50) 100%);
+    color: var(--kae-ink-900);
+}
+.kae-home-hero::before { background: none; }
+.kae-home-hero .kae-eyebrow {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-700);
+    border-radius: 9999px;
+    padding: 4px 12px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-block;
+    border: 1px solid var(--kae-brand-100);
+}
+.kae-home-hero h1 { color: var(--kae-ink-900); letter-spacing: -0.02em; font-weight: 700; }
+.kae-home-hero p.lead { color: var(--kae-ink-600); }
+
+/* Eyebrow used elsewhere too */
+.kae-eyebrow {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-700);
+    border-radius: 9999px;
+    padding: 3px 10px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-block;
+}
+
+/* ---------- 13. Alerts ---------- */
+.alert {
+    border-radius: 12px;
+    border-width: 1px;
+    padding: 12px 14px;
+    font-size: 0.875rem;
+}
+.alert-info {
+    background: var(--kae-brand-50);
+    border-color: var(--kae-brand-100);
+    color: var(--kae-brand-800);
+}
+.alert-warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #92400e;
+}
+.alert-danger {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+}
+.alert-success {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+
+/* ---------- 14. Vehicle detail price block ---------- */
+.kae-detail-price-v2 {
+    background: linear-gradient(180deg, var(--kae-brand-50) 0%, #ffffff 100%);
+    border: 1px solid var(--kae-brand-100);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+.kae-detail-price-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--kae-brand-700);
+}
+.kae-detail-price-value {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--kae-ink-900);
+    line-height: 1.1;
+    margin: 4px 0 4px;
+    letter-spacing: -0.01em;
+}
+.kae-detail-price-dzd { color: var(--kae-ink-500); font-size: 0.8125rem; }
+.kae-detail-title { font-size: 1.5rem; font-weight: 700; color: var(--kae-ink-900); letter-spacing: -0.01em; }
+
+/* ---------- 15. Nav tabs ---------- */
+.nav-tabs, .kae-detail-tabs, .kae-admin-tabs {
+    border-bottom: 1px solid var(--kae-ink-100);
+}
+.nav-tabs .nav-link, .kae-detail-tabs .nav-link, .kae-admin-tabs .nav-link {
+    color: var(--kae-ink-500);
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 10px 14px;
+}
+.nav-tabs .nav-link.active,
+.kae-detail-tabs .nav-link.active,
+.kae-admin-tabs .nav-link.active {
+    color: var(--kae-brand-700);
+    background: transparent;
+    border-bottom-color: var(--kae-brand-600);
+}
+.nav-pills .nav-link {
+    color: var(--kae-ink-500);
+    font-size: 0.875rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+.nav-pills .nav-link.active {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-700);
+}
+
+/* ---------- 16. Pagination ---------- */
+.pagination .page-link {
+    color: var(--kae-ink-700);
+    border-color: var(--kae-ink-100);
+    background: #ffffff;
+    font-size: 0.8125rem;
+    border-radius: 6px;
+    margin: 0 2px;
+}
+.pagination .page-item.active .page-link {
+    background: var(--kae-brand-600);
+    border-color: var(--kae-brand-600);
+    color: #fff;
+}
+.pagination .page-link:hover {
+    background: var(--kae-brand-50);
+    color: var(--kae-brand-800);
+    border-color: var(--kae-brand-200);
+}
+
+/* ---------- 17. Modal ---------- */
+.modal-content {
+    border-radius: 12px;
+    border: 1px solid var(--kae-ink-100);
+    box-shadow: 0 24px 48px rgba(15,23,42,0.18);
+}
+.modal-header { border-bottom: 1px solid var(--kae-ink-100); padding: 14px 18px; }
+.modal-footer { border-top: 1px solid var(--kae-ink-100); padding: 12px 18px; }
+.modal-title { font-size: 1rem; font-weight: 600; }
+
+/* ---------- 18. Brand badge mark (sympto signature: small icon tile) ---------- */
+.kae-mark {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--kae-brand-600);
+    color: #fff;
+    display: inline-grid;
+    place-items: center;
+    font-weight: 700;
+}
+
+/* ---------- 19. Section title (uppercase tracked, sympto signature) ---------- */
+.kae-section-title,
+.kae-form-section h2 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--kae-ink-500);
+    margin: 24px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--kae-ink-100);
+}
+
+/* ---------- 20. Misc text utilities ---------- */
+.text-muted { color: var(--kae-ink-500) !important; }
+.text-subtle { color: var(--kae-ink-400) !important; }
+code { color: var(--kae-ink-700); background: var(--kae-ink-100); padding: 1px 5px; border-radius: 4px; font-size: 0.8125rem; }
+
+/* ---------- 21. Cost-estimator rows ---------- */
+.kae-estimator,
+.kae-estimator-rows {
+    border-color: var(--kae-ink-100);
+}
+.kae-estimator-row { border-color: var(--kae-ink-100) !important; }
+.kae-estimator-total {
+    color: var(--kae-brand-700);
+}
+
+/* ---------- 22. RTL guards ---------- */
+html[dir="rtl"] .kae-admin-nav-link { padding: 8px 12px; }
+html[dir="rtl"] .form-label { letter-spacing: 0.04em; }
+
+/* ---------- 23. Print — don't fight the proposal CSS ---------- */
+@media print {
+    body { background: #fff; }
+}
